@@ -25,8 +25,8 @@ jobs:
       - name: Installation des dépendances
         run: npm install
 
-      - name: Linter
-        run: npm run lint
+      - name: Analyse du code
+        run: npm run analyse
 
       - name: Format
         run: |
@@ -35,3 +35,30 @@ jobs:
 
       - name: Tests E2E
         run: npm run test:e2e
+
+  back-testing:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Back
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
+      - name: Installation des dépendances
+        run: composer install
+
+      - name: Analyse du code
+        run: composer analyse
+
+      - name: Format
+        run: composer format:check
+
+      - name: Tests Unitaires
+        run: composer test:unit
