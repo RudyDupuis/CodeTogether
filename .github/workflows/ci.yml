@@ -29,7 +29,9 @@ jobs:
         run: npm run lint
 
       - name: Format
-        run: npm run format
+        run: |
+          npm run format
+          git diff --exit-code || (echo "Il y a des avertissements dans le format" && exit 1)
 
       - name: Tests E2E
         run: npm run test:e2e
