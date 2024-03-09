@@ -1,0 +1,35 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  front-testing:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Front
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v2
+
+      - name: Installation de Node
+        uses: actions/setup-node@v2
+
+      - name: Installation des dépendances
+        run: npm install
+
+      - name: Linter
+        run: npm run lint
+
+      - name: Format
+        run: npm run format
+
+      - name: Tests E2E
+        run: npm run test:e2e
