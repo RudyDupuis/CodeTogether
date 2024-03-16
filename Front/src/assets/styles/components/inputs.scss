@@ -1,0 +1,25 @@
+input,
+textarea,
+select {
+  color: $dark;
+  padding: 8px 24px;
+  border-radius: 15px;
+  box-shadow:
+    4px 4px 4px 0 $darkShadow,
+    inset 4px 4px 4px 0 $darkShadow;
+  width: 300px;
+
+  &:hover,
+  &:focus {
+    outline: 3px solid $veryimportant;
+  }
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+option {
+  color: $dark;
+}

@@ -1,0 +1,21 @@
+.chip-d {
+  padding: 8px 16px;
+  border-radius: 50px;
+  color: $dark;
+  width: fit-content;
+  background: $default;
+}
+.chip-i {
+  padding: 8px 16px;
+  border-radius: 50px;
+  color: $dark;
+  width: fit-content;
+  background: $important;
+}
+.chip-vi {
+  padding: 8px 16px;
+  border-radius: 50px;
+  color: $dark;
+  width: fit-content;
+  background: $veryimportant;
+}

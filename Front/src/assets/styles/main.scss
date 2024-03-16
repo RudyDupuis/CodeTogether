@@ -1,0 +1,81 @@
+/***** Colors *****/
+
+$primary: #58b9ff;
+$secondary: #ffbf1d;
+$light: #fefefe;
+$dark: #1c1b20;
+$grey: #949494;
+
+$default: $grey;
+$important: $primary;
+$veryimportant: $secondary;
+
+$primaryShadow: rgba(88, 185, 255, 0.2);
+$secondaryShadow: rgba(255, 191, 29, 0.2);
+$lightShadow: rgba(254, 254, 254, 0.2);
+$darkShadow: rgba(28, 27, 32, 0.25);
+$greyShadow: rgba(148, 148, 148, 0.2);
+
+/***** Fonts *****/
+@font-face {
+  font-family: 'main-bold';
+  src: url(../fonts/Kanit-Bold.ttf);
+  font-display: swap;
+}
+@font-face {
+  font-family: 'main-medium';
+  src: url(../fonts/Kanit-Medium.ttf);
+  font-display: swap;
+}
+@font-face {
+  font-family: 'main-regular';
+  src: url(../fonts/Kanit-Regular.ttf);
+  font-display: swap;
+}
+
+$main-bold: 'main-bold', Arial;
+$main-medium: 'main-medium', Arial;
+$main-regular: 'main-regular', Arial;
+
+* {
+  font-family: $main-regular;
+  font-size: 14px;
+  color: $light;
+}
+
+h1 {
+  font-family: $main-bold;
+  font-size: 28px;
+}
+h2 {
+  font-family: $main-medium;
+  font-size: 24px;
+}
+h3 {
+  font-size: 20px;
+}
+
+/***** Normalize *****/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+body {
+  background: $dark;
+  min-height: 100vh;
+}
+
+@import './helpers/display.scss';
+@import './helpers/padding-marging.scss';
+@import './helpers/backgound.scss';
+
+@import './components/buttons.scss';
+@import './components/inputs.scss';
+@import './components/chips.scss';
