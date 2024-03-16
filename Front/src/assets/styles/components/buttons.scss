@@ -1,0 +1,40 @@
+button {
+  background: $primary;
+  padding: 20px 64px;
+  border-radius: 50px;
+  box-shadow:
+    5px 5px 8px 0 $primaryShadow,
+    inset 5px 5px 8px 0 $lightShadow;
+  font-family: $main-bold;
+  font-size: 18px;
+
+  &:hover {
+    background: $veryimportant;
+    color: $dark;
+    box-shadow:
+      5px 5px 8px 0 $secondaryShadow,
+      inset 5px 5px 8px 0 $lightShadow;
+    cursor: pointer;
+  }
+
+  &:active {
+    animation: moveBack 0.2s ease-in-out forwards;
+  }
+
+  @keyframes moveBack {
+    from {
+      transform: translate(0, 0);
+    }
+    to {
+      transform: translate(5px, 5px);
+      box-shadow: none;
+    }
+  }
+}
+
+.btn-secondary {
+  background: $grey;
+  box-shadow:
+    5px 5px 8px 0 $greyShadow,
+    inset 5px 5px 8px 0 $lightShadow;
+}
