@@ -8,7 +8,8 @@ RUN apk add --no-cache \
     acl \
     fcgi \
     file \
-    gettext
+    gettext \
+    openssl
 
 # install required php extension
 ARG APCU_VERSION=5.1.21
@@ -61,7 +62,6 @@ WORKDIR /srv/api
 ENV UTILS \
     git \
     nano \
-    openssl \
     openssh \
     tree  \
     util-linux \
@@ -89,7 +89,8 @@ RUN set -eux; \
 # copying conf
 COPY docker/api-platform/api-platform.dev.ini $PHP_INI_DIR/conf.d/api-platform.ini
 
-RUN symfony server:ca:install
+COPY docker/dev/init.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/init.sh
 
-CMD ["symfony", "serve", "--port=5001"]
+CMD ["/usr/local/bin/init.sh"]
 
