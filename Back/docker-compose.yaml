@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  php:
+    build:
+      target: development
+    environment:
+      APP_ENV: dev
+      APP_SECRET: S3cr3tF0rD3v
+      XDEBUG_MODE: develop,debug,trace,coverage
+      XDEBUG_CONFIG: >-
+        remote_enable=1
+        discover_client_host=1
+        start_with_request=default
+        log_level=0
+        client_port=9003
+        idekey=${XDEBUG_IDEKEY:-VSCODE}
+        output_dir=/var/log/xdebug
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./:/srv/api
+    tty: true
+
+  database:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-coderensembledb}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cedb55}
+      POSTGRES_USER: ${POSTGRES_USER:-admincoderensemble}
+      LANG: fr_FR.utf8
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
+volumes:
+  database_data:

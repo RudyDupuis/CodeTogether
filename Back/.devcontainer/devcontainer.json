@@ -1,0 +1,40 @@
+{
+    "name": "Code Together Back",
+    "dockerComposeFile": [
+        "../docker-compose.yaml"
+    ],
+    "service": "php",
+    "workspaceFolder": "/srv/api",
+    "containerEnv": {
+        "XDEBUG_IDEKEY": "VSCODE"
+    },
+    "portsAttributes": {
+        "5001": {
+            "label": "Code Together Back",
+            "onAutoForward": "silent"
+        }
+    },
+    // Add the IDs of extensions you want installed when the container is created.
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "formulahendry.auto-rename-tag",
+                "xdebug.php-debug",
+                "bmewburn.vscode-intelephense-client",
+                "esbenp.prettier-vscode"
+            ],
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                "composer.executablePath": "/usr/local/bin/composer",
+                "files.encoding": "utf8",
+                "intelephense.environment.documentRoot": "${workspaceFolder}/public/index.php",
+                "intelephense.environment.phpVersion": "8.2.0",
+                "php.debug.ideKey": "VSCODE",
+                "php.validate.enable": false,
+                "terminal.integrated.defaultProfile.linux": "bash"
+            }
+        }
+    },
+    "onCreateCommand": "composer install --no-scripts",
+    "shutdownAction": "symfony server:stop"
+}
