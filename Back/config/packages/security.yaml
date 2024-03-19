@@ -1,6 +1,7 @@
 security:
   password_hashers:
-    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
+    App\Entity\User: "auto"
+  enable_authenticator_manager: true
   providers:
     app_user_provider:
       entity:
@@ -14,7 +15,7 @@ security:
       stateless: true
       provider: app_user_provider
       json_login:
-        check_path: auth
+        check_path: /auth
         username_path: email
         password_path: password
         success_handler: lexik_jwt_authentication.handler.authentication_success
