@@ -77,7 +77,8 @@ ENV SONARLINT_DEP \
 
 # install aditionnal package for development
 RUN apk add --no-cache $UTILS $SONARLINT_DEP \
-    --update linux-headers
+    --update linux-headers \
+    postgresql-client
 
 # installing xdebug
 RUN set -eux; \
