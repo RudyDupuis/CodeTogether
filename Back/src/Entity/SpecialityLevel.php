@@ -2,36 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\SpecialityLevelRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: SpecialityLevelRepository::class)]
+
 class SpecialityLevel
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    private ?Speciality $speciality = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $speciality = null;
-
-    #[ORM\Column(length: 15)]
     #[Assert\Choice(choices: ['Beginner', 'Intermediate', 'Advanced'])]
     private ?string $level = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getSpeciality(): ?string
+    public function getSpeciality(): ?Speciality
     {
         return $this->speciality;
     }
 
-    public function setSpeciality(string $speciality): static
+    public function setSpeciality(Speciality $speciality): static
     {
         $this->speciality = $speciality;
 
