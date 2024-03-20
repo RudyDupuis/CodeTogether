@@ -6,6 +6,8 @@ $light: #fefefe;
 $dark: #1c1b20;
 $grey: #949494;
 
+$error: #ff6c58;
+
 $default: $grey;
 $important: $primary;
 $veryimportant: $secondary;
@@ -72,9 +74,13 @@ body {
   min-height: 100vh;
 }
 
+main {
+  min-height: 100vh;
+}
+
 @import './helpers/display.scss';
 @import './helpers/padding-marging.scss';
-@import './helpers/backgound.scss';
+@import './helpers/backgound-text.scss';
 
 @import './components/buttons.scss';
 @import './components/inputs.scss';
