@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { Auth } from '@/entities/user/auth/Auth'
-import { validationMethods } from '@/helpers/entities/Validation'
+import { validationMethods } from '@/helpers/form/Validation'
 import { ref } from 'vue'
 import CTInput from '@/components/form/CTInput.vue'
 import CTForm from '@/components/form/CTForm.vue'
+import LogoTitle from '@/components/svg/LogoTitle.vue'
 import { ApiMethods } from '@/helpers/entities/ApiMethods'
 import { useRouter } from 'vue-router'
 
@@ -12,20 +13,20 @@ const router = useRouter()
 const auth = ref<Partial<Auth>>({})
 
 const isFormValid = ref(false)
-const ErrorMessage = ref("")
+const ErrorMessage = ref('')
 
 function checkIfFormValid() {
   isFormValid.value = validationMethods.validateRequiredFields(auth.value, ['email', 'password'])
 }
 
-const apiMethods = new ApiMethods();
+const apiMethods = new ApiMethods()
 
 async function authRequest() {
-  ErrorMessage.value = ""
-  const response = await apiMethods.postData("auth", auth.value)
+  ErrorMessage.value = ''
+  const response = await apiMethods.postData('auth', auth.value)
 
-  if(response.token) {
-    localStorage.setItem('token', response.token);
+  if (response.token) {
+    localStorage.setItem('token', response.token)
     router.push({ name: 'home' })
   } else {
     ErrorMessage.value = response.message
@@ -36,7 +37,7 @@ async function authRequest() {
 <template>
   <main class="f a-cent j-cent">
     <section class="f-col a-cent">
-      <img src="../assets/images/logo-big.svg" class="mb-128" />
+      <logo-title class="mb-128" />
       <router-link :to="{ name: 'register' }">
         <button>Create an account ?</button>
       </router-link>
@@ -66,3 +67,29 @@ async function authRequest() {
     </c-t-form>
   </main>
 </template>
+
+<style scoped>
+@media (max-width: 1000px) {
+  main {
+    flex-direction: column;
+  }
+
+  svg {
+    margin: 64px 0;
+  }
+
+  form {
+    margin: 64px 0 0 0;
+  }
+}
+
+@media (max-width: 600px) {
+  svg {
+    margin: 0 0 64px 0;
+  }
+
+  form {
+    padding: 32px;
+  }
+}
+</style>

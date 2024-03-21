@@ -78,9 +78,9 @@ main {
   min-height: 100vh;
 }
 
+@import './helpers/backgound-text.scss';
 @import './helpers/display.scss';
 @import './helpers/padding-marging.scss';
-@import './helpers/backgound-text.scss';
 
 @import './components/buttons.scss';
 @import './components/inputs.scss';

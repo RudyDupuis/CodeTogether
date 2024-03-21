@@ -1,4 +1,5 @@
 export class ApiMethods {
+  //TODO mettre dans un .env
   private baseUrl: string = 'https://localhost:5001/api'
 
   async getData(endpoint: string) {

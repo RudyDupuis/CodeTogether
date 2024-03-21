@@ -1,6 +1,5 @@
 <template>
   <main class="f-col a-cent p-64-0">
-    <img src="../assets/images/logo-big.svg" class="mb-16" />
     <img src="../assets/images/logo-small.svg" class="mb-64" />
     <h1 class="mb-16">Code Together in H1</h1>
     <h2 class="mb-16">Code Together in H2</h2>
