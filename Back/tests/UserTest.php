@@ -14,7 +14,7 @@ class UserTest extends TestCase
         $user->setEmail('test@example.com');
         $this->assertSame('test@example.com', $user->getEmail());
 
-        $user->setRoles(['ROLE_ADMIN']);
+        $user->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
         $this->assertSame(['ROLE_ADMIN', 'ROLE_USER'], $user->getRoles());
 
         $password = 'testPassword';

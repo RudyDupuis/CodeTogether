@@ -1,3 +1,4 @@
+/***** Background *****/
 .bg-light-shadow {
   background: $light;
   box-shadow:
@@ -5,6 +6,16 @@
     inset 15px 15px 40px 0 $darkShadow;
 }
 
+/***** Border *****/
 .br-50 {
   border-radius: 50px;
+}
+
+/***** Text *****/
+.txt-dark {
+  color: $dark;
+}
+
+.txt-error {
+  color: $error;
 }
