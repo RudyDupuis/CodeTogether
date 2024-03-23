@@ -4,6 +4,7 @@ import { defineProps, ref } from 'vue'
 interface FormProps {
   onSubmit: () => void
   isFormValid: boolean
+  isRequiredFieldCompleted: boolean
   classValue: string
   errorMessage: string
 }
@@ -23,7 +24,7 @@ const handleSubmit = () => {
 <template>
   <form @submit.prevent="handleSubmit" :class="'f-col a-cent ' + classValue">
     <slot></slot>
-    <p v-if="showRequiredFieldsMessage && !isFormValid" class="txt-error">
+    <p v-if="showRequiredFieldsMessage && !isRequiredFieldCompleted" class="txt-error">
       Not all required fields are completed
     </p>
     <p v-if="errorMessage" class="txt-error">{{ errorMessage }}</p>

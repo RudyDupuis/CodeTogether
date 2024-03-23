@@ -16,4 +16,4 @@ export const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
 
 export const MAIL_ERROR_MESSAGE = 'Invalid email address'
 export const PASSWORD_ERROR_MESSAGE =
-  'The password must contain at least one uppercase, one lowercase, a number and eight characters'
+  'At least one uppercase letter, one lowercase letter, one number and eight characters'

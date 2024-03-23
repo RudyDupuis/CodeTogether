@@ -6,6 +6,16 @@
     inset 15px 15px 40px 0 $darkShadow;
 }
 
+.bg-dark {
+  background: $dark;
+}
+.bg-primary {
+  background: $primary;
+}
+.bg-secondary {
+  background: $secondary;
+}
+
 /***** Border *****/
 .br-50 {
   border-radius: 50px;
