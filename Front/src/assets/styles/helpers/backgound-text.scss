@@ -1,0 +1,31 @@
+/***** Background *****/
+.bg-light-shadow {
+  background: $light;
+  box-shadow:
+    10px 10px 20px 0 $lightShadow,
+    inset 15px 15px 40px 0 $darkShadow;
+}
+
+.bg-dark {
+  background: $dark;
+}
+.bg-primary {
+  background: $primary;
+}
+.bg-secondary {
+  background: $secondary;
+}
+
+/***** Border *****/
+.br-50 {
+  border-radius: 50px;
+}
+
+/***** Text *****/
+.txt-dark {
+  color: $dark;
+}
+
+.txt-error {
+  color: $error;
+}
