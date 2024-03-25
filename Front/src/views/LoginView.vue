@@ -65,6 +65,7 @@ async function authRequest() {
         placeholder="Mail"
         :errorDisplay="false"
         marginBottom="mb-16"
+        dataCy="login-user-email"
       />
       <c-t-input
         v-model="auth.password"
@@ -72,8 +73,11 @@ async function authRequest() {
         placeholder="Password"
         :errorDisplay="false"
         marginBottom="mb-32"
+        dataCy="login-user-password"
       />
-      <button v-if="!isFormLoading" @click="checkIfFormValid()">Log in</button>
+      <button v-if="!isFormLoading" @click="checkIfFormValid()" data-cy="login-form-button">
+        Log in
+      </button>
       <c-t-dot-loader v-if="isFormLoading" />
     </c-t-form>
   </main>

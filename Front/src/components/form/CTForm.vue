@@ -27,7 +27,7 @@ const handleSubmit = () => {
     <p v-if="showRequiredFieldsMessage && !isRequiredFieldCompleted" class="txt-error">
       Not all required fields are completed
     </p>
-    <p v-if="errorMessage" class="txt-error">{{ errorMessage }}</p>
+    <p v-if="errorMessage" class="txt-error" data-cy="form-error-message">{{ errorMessage }}</p>
   </form>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="box f j-betw">
+  <div class="box f j-betw" data-cy="dot-loader">
     <div class="dot dot-1 bg-primary"></div>
     <div class="dot dot-2 bg-primary"></div>
     <div class="dot dot-3 bg-primary"></div>

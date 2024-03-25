@@ -9,6 +9,7 @@ interface Props {
   errorMessage?: string
   errorDisplay: boolean
   marginBottom: string
+  dataCy: string
 }
 
 const props = defineProps<Props>()
@@ -29,8 +30,8 @@ const value = computed({
 
 <template>
   <div :class="'f-col a-cent ' + marginBottom">
-    <input v-model="value" :type="type" :placeholder="placeholder" />
-    <p v-if="!errorDisplay" class="txt-error">{{ errorMessage }}</p>
+    <input v-model="value" :type="type" :placeholder="placeholder" :data-cy="dataCy" />
+    <p v-if="!errorDisplay" class="txt-error" :data-cy="dataCy + '-error'">{{ errorMessage }}</p>
   </div>
 </template>
 
