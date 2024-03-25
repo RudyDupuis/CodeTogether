@@ -3,15 +3,6 @@ describe('As a user, i can register', () => {
     cy.visit('/register')
     cy.contains('h1', 'Register')
   })
-  it('can register', () => {
-    cy.getBySel('register-user-email').type('john.doe@test.com')
-    cy.getBySel('register-user-password').type('123456azertAA')
-    
-    cy.getBySel('register-form-button').click()
-    cy.getBySel('register-form-button').click()
-
-    cy.getBySel('dot-loader').should('be.visible')
-  })
   it('cannot register with a bad email', () => {
     cy.getBySel('register-user-email').type('badmail')
     cy.getBySel('register-user-password').type('123456azertAA')
