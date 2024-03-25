@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Entity;
+namespace App\Classe;
 
+use App\Entity\Technology;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
-class SpecialityLevel
+class TechnologyLevel
 {
-    private ?Speciality $speciality = null;
+    private ?Technology $technology = null;
 
     #[Assert\Choice(choices: ['Beginner', 'Intermediate', 'Advanced'])]
     private ?string $level = null;
 
-    public function getSpeciality(): ?Speciality
+    public function getTechnology(): ?Technology
     {
-        return $this->speciality;
+        return $this->technology;
     }
 
-    public function setSpeciality(Speciality $speciality): static
+    public function setTechnology(Technology $technology): static
     {
-        $this->speciality = $speciality;
+        $this->technology = $technology;
 
         return $this;
     }
