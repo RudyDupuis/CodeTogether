@@ -94,6 +94,7 @@ async function registerRequest() {
         :errorDisplay="isMailValid"
         :errorMessage="MAIL_ERROR_MESSAGE"
         marginBottom="mb-16"
+        dataCy="register-user-email"
       />
       <c-t-input
         v-model="user.password"
@@ -102,8 +103,11 @@ async function registerRequest() {
         :errorDisplay="isPasswordValid"
         :errorMessage="PASSWORD_ERROR_MESSAGE"
         marginBottom="mb-32"
+        dataCy="register-user-password"
       />
-      <button v-if="!isFormLoading" @click="checkIfFormValid()">Sign in</button>
+      <button v-if="!isFormLoading" @click="checkIfFormValid()" data-cy="register-form-button">
+        Sign in
+      </button>
       <c-t-dot-loader v-if="isFormLoading" />
     </c-t-form>
   </main>
