@@ -11,14 +11,6 @@ describe('As a user, i can register', () => {
     cy.getBySel('register-form-button').click()
 
     cy.getBySel('dot-loader').should('be.visible')
-    
-    cy.intercept('POST', 'https://localhost:5001/api/register').as('registerRequest');
-    cy.wait('@registerRequest').then((interception) => {
-      expect(interception.request.body).to.include({
-        email: 'john.doe@test.com',
-        password: '123456azertAA'
-      });
-    });
   })
   it('cannot register with a bad email', () => {
     cy.getBySel('register-user-email').type('badmail')

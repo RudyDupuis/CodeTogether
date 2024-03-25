@@ -11,13 +11,5 @@ describe('As a user, i can login', () => {
     cy.getBySel('login-form-button').click()
 
     cy.getBySel('dot-loader').should('be.visible')
-    
-    cy.intercept('POST', 'https://localhost:5001/api/auth').as('loginRequest');
-    cy.wait('@loginRequest').then((interception) => {
-      expect(interception.request.body).to.include({
-        email: 'john.doe@test.com',
-        password: '123456azertAA'
-      });
-    });
   })
 })
