@@ -24,7 +24,11 @@ const handleSubmit = () => {
 <template>
   <form @submit.prevent="handleSubmit" :class="'f-col a-cent ' + classValue">
     <slot></slot>
-    <p v-if="showRequiredFieldsMessage && !isRequiredFieldCompleted" class="txt-error">
+    <p
+      v-if="showRequiredFieldsMessage && !isRequiredFieldCompleted"
+      class="txt-error"
+      data-cy="form-required-fields-error-message"
+    >
       Not all required fields are completed
     </p>
     <p v-if="errorMessage" class="txt-error" data-cy="form-error-message">{{ errorMessage }}</p>

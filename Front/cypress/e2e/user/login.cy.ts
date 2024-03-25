@@ -12,4 +12,14 @@ describe('As a user, i can login', () => {
 
     cy.getBySel('dot-loader').should('be.visible')
   })
+  it('cannot login without email', () => {
+    cy.getBySel('login-user-password').type('123456azertAA')
+    cy.getBySel('login-form-button').click()
+    cy.getBySel('form-required-fields-error-message').should('be.visible')
+  })
+  it('cannot login without password', () => {
+    cy.getBySel('login-user-email').type('john.doe@test.com')
+    cy.getBySel('login-form-button').click()
+    cy.getBySel('form-required-fields-error-message').should('be.visible')
+  })
 })
