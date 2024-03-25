@@ -4,6 +4,7 @@ import { validationMethods } from '@/helpers/form/Validation'
 import { ref } from 'vue'
 import CTInput from '@/components/form/CTInput.vue'
 import CTForm from '@/components/form/CTForm.vue'
+import CTDotLoader from '@/components/loader/CTDotLoader.vue'
 import LogoTitle from '@/components/svg/LogoTitle.vue'
 import { ApiMethods } from '@/helpers/entities/ApiMethods'
 import { useRouter } from 'vue-router'
@@ -13,24 +14,32 @@ const router = useRouter()
 const auth = ref<Partial<Auth>>({})
 
 const isFormValid = ref(false)
-const ErrorMessage = ref('')
+const isRequiredFieldCompleted = ref(false)
+const errorMessage = ref('')
+const isFormLoading = ref(false)
 
 function checkIfFormValid() {
-  isFormValid.value = validationMethods.validateRequiredFields(auth.value, ['email', 'password'])
+  isRequiredFieldCompleted.value = validationMethods.validateRequiredFields(auth.value, [
+    'email',
+    'password'
+  ])
+  isFormValid.value = isRequiredFieldCompleted.value
 }
 
 const apiMethods = new ApiMethods()
 
 async function authRequest() {
-  ErrorMessage.value = ''
+  errorMessage.value = ''
+  isFormLoading.value = true
   const response = await apiMethods.postData('auth', auth.value)
 
   if (response.token) {
     localStorage.setItem('token', response.token)
     router.push({ name: 'home' })
   } else {
-    ErrorMessage.value = response.message
+    errorMessage.value = response.message
   }
+  isFormLoading.value = false
 }
 </script>
 
@@ -46,7 +55,8 @@ async function authRequest() {
       :onSubmit="authRequest"
       classValue="bg-light-shadow br-50 p-32-64 ml-128"
       :isFormValid="isFormValid"
-      :errorMessage="ErrorMessage"
+      :isRequiredFieldCompleted="isRequiredFieldCompleted"
+      :errorMessage="errorMessage"
     >
       <h1 class="txt-dark mb-32">Login</h1>
       <c-t-input
@@ -63,7 +73,8 @@ async function authRequest() {
         :errorDisplay="false"
         marginBottom="mb-32"
       />
-      <button @click="checkIfFormValid()">Log in</button>
+      <button v-if="!isFormLoading" @click="checkIfFormValid()">Log in</button>
+      <c-t-dot-loader v-if="isFormLoading" />
     </c-t-form>
   </main>
 </template>

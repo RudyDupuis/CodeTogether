@@ -30,7 +30,7 @@ const value = computed({
 <template>
   <div :class="'f-col a-cent ' + marginBottom">
     <input v-model="value" :type="type" :placeholder="placeholder" />
-    <p v-if="errorDisplay" class="txt-error">{{ errorMessage }}</p>
+    <p v-if="!errorDisplay" class="txt-error">{{ errorMessage }}</p>
   </div>
 </template>
 

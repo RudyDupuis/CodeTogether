@@ -90,8 +90,16 @@ RUN set -eux; \
 # copying conf
 COPY docker/api-platform/api-platform.dev.ini $PHP_INI_DIR/conf.d/api-platform.ini
 
-COPY docker/dev/init.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/init.sh
+RUN symfony server:ca:install
 
-CMD ["/usr/local/bin/init.sh"]
+# add commands that run once the container is built
+COPY docker/dev/entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# convert entrypoint.sh to Unix format
+RUN dos2unix /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]
+
+CMD ["symfony", "serve:start", "--port=5001"]
 
