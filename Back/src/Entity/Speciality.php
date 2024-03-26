@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\SpecialityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+#[GetCollection()]
 #[ORM\Entity(repositoryClass: SpecialityRepository::class)]
 class Speciality
 {

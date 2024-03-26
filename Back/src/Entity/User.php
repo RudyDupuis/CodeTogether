@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[Post(
     uriTemplate: 'register',
+    denormalizationContext: ['groups' => [self::CREATE_USER]],
     normalizationContext: ['groups' => [self::DISPLAY_USER]]
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -22,6 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     public const DISPLAY_USER = 'display user information';
+    public const CREATE_USER = 'create user and profil entity';
 
     #[Groups([self::DISPLAY_USER])]
     #[ORM\Id]
@@ -29,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups([self::DISPLAY_USER])]
+    #[Groups([self::DISPLAY_USER, self::CREATE_USER])]
     #[ORM\Column(length: 180)]
     #[Assert\Email]
     private ?string $email = null;
@@ -37,15 +39,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var list<string> The user roles
      */
-    #[Groups([self::DISPLAY_USER])]
+    #[Groups([self::DISPLAY_USER, self::CREATE_USER])]
     #[ORM\Column]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
+    #[Groups([self::CREATE_USER])]
     #[ORM\Column]
     private ?string $password = null;
+
+    #[Groups([self::CREATE_USER, self::DISPLAY_USER])]
+    #[ORM\OneToOne(mappedBy: 'userRelation', cascade: ['persist', 'remove'])]
+    private ?Profil $profil = null;
 
     public function getId(): ?int
     {
@@ -118,5 +125,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getProfil(): ?Profil
+    {
+        return $this->profil;
+    }
+
+    public function setProfil(Profil $profil): static
+    {
+        // set the owning side of the relation if necessary
+        if ($profil->getUserRelation() !== $this) {
+            $profil->setUserRelation($this);
+        }
+
+        $this->profil = $profil;
+
+        return $this;
     }
 }
