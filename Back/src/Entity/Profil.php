@@ -6,15 +6,18 @@ use App\Repository\ProfilRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProfilRepository::class)]
 class Profil
 {
+    #[Groups([User::DISPLAY_USER])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups([User::CREATE_USER, User::DISPLAY_USER])]
     #[ORM\Column(length: 255)]
     private ?string $pseudo = null;
 
@@ -40,10 +43,11 @@ class Profil
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userRelation = null;
 
-    #[ORM\OneToMany(targetEntity: SpecialityLevel::class, mappedBy: 'profil', orphanRemoval: true)]
+    #[Groups([User::CREATE_USER])]
+    #[ORM\OneToMany(targetEntity: SpecialityLevel::class, mappedBy: 'profil', orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $specialityList;
 
-    #[ORM\OneToMany(targetEntity: TechnologyLevel::class, mappedBy: 'profil', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: TechnologyLevel::class, mappedBy: 'profil', orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $technologyList;
 
     public function __construct()

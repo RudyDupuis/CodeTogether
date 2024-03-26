@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SpecialityLevelRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SpecialityLevelRepository::class)]
@@ -14,10 +15,12 @@ class SpecialityLevel
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups([User::CREATE_USER])]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Speciality $speciality = null;
 
+    #[Groups([User::CREATE_USER])]
     #[ORM\Column(length: 255)]
     #[Assert\Choice(choices: ['Beginner', 'Intermediate', 'Advanced'])]
     private ?string $level = null;
