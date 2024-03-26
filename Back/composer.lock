@@ -8,16 +8,16 @@
   "packages": [
     {
       "name": "api-platform/core",
-      "version": "v3.2.17",
+      "version": "v3.2.18",
       "source": {
         "type": "git",
         "url": "https://github.com/api-platform/core.git",
-        "reference": "1cc114b93e95bdce5b48be46f84c1e11446a8d2f"
+        "reference": "4c5a35f46158791b2990f24507d5a9e286a569ff"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/api-platform/core/zipball/1cc114b93e95bdce5b48be46f84c1e11446a8d2f",
-        "reference": "1cc114b93e95bdce5b48be46f84c1e11446a8d2f",
+        "url": "https://api.github.com/repos/api-platform/core/zipball/4c5a35f46158791b2990f24507d5a9e286a569ff",
+        "reference": "4c5a35f46158791b2990f24507d5a9e286a569ff",
         "shasum": ""
       },
       "require": {
@@ -168,9 +168,9 @@
       ],
       "support": {
         "issues": "https://github.com/api-platform/core/issues",
-        "source": "https://github.com/api-platform/core/tree/v3.2.17"
+        "source": "https://github.com/api-platform/core/tree/v3.2.18"
       },
-      "time": "2024-03-15T15:26:20+00:00"
+      "time": "2024-03-25T18:22:36+00:00"
     },
     {
       "name": "doctrine/cache",
@@ -1155,16 +1155,16 @@
     },
     {
       "name": "doctrine/orm",
-      "version": "3.1.0",
+      "version": "3.1.1",
       "source": {
         "type": "git",
         "url": "https://github.com/doctrine/orm.git",
-        "reference": "716fc97b70cf8116f74eaa0588eef51420874bf9"
+        "reference": "9c560713925ac5859342e6ff370c4c997acf2fd4"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/doctrine/orm/zipball/716fc97b70cf8116f74eaa0588eef51420874bf9",
-        "reference": "716fc97b70cf8116f74eaa0588eef51420874bf9",
+        "url": "https://api.github.com/repos/doctrine/orm/zipball/9c560713925ac5859342e6ff370c4c997acf2fd4",
+        "reference": "9c560713925ac5859342e6ff370c4c997acf2fd4",
         "shasum": ""
       },
       "require": {
@@ -1181,7 +1181,7 @@
         "php": "^8.1",
         "psr/cache": "^1 || ^2 || ^3",
         "symfony/console": "^5.4 || ^6.0 || ^7.0",
-        "symfony/var-exporter": "~6.2.13 || ^6.3.2 || ^7.0"
+        "symfony/var-exporter": "^6.3.9 || ^7.0"
       },
       "require-dev": {
         "doctrine/coding-standard": "^12.0",
@@ -1237,9 +1237,9 @@
       ],
       "support": {
         "issues": "https://github.com/doctrine/orm/issues",
-        "source": "https://github.com/doctrine/orm/tree/3.1.0"
+        "source": "https://github.com/doctrine/orm/tree/3.1.1"
       },
-      "time": "2024-03-03T17:45:20+00:00"
+      "time": "2024-03-21T11:37:52+00:00"
     },
     {
       "name": "doctrine/persistence",
@@ -1946,16 +1946,16 @@
     },
     {
       "name": "phpstan/phpdoc-parser",
-      "version": "1.26.0",
+      "version": "1.27.0",
       "source": {
         "type": "git",
         "url": "https://github.com/phpstan/phpdoc-parser.git",
-        "reference": "231e3186624c03d7e7c890ec662b81e6b0405227"
+        "reference": "86e4d5a4b036f8f0be1464522f4c6b584c452757"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/231e3186624c03d7e7c890ec662b81e6b0405227",
-        "reference": "231e3186624c03d7e7c890ec662b81e6b0405227",
+        "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/86e4d5a4b036f8f0be1464522f4c6b584c452757",
+        "reference": "86e4d5a4b036f8f0be1464522f4c6b584c452757",
         "shasum": ""
       },
       "require": {
@@ -1987,9 +1987,9 @@
       "description": "PHPDoc parser with support for nullable, intersection and generic types",
       "support": {
         "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-        "source": "https://github.com/phpstan/phpdoc-parser/tree/1.26.0"
+        "source": "https://github.com/phpstan/phpdoc-parser/tree/1.27.0"
       },
-      "time": "2024-02-23T16:05:55+00:00"
+      "time": "2024-03-21T13:14:53+00:00"
     },
     {
       "name": "psr/cache",
@@ -6657,16 +6657,16 @@
     },
     {
       "name": "friendsofphp/php-cs-fixer",
-      "version": "v3.52.0",
+      "version": "v3.52.1",
       "source": {
         "type": "git",
         "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-        "reference": "a3564bd66f4bce9bc871ef18b690e2dc67a7f969"
+        "reference": "6e77207f0d851862ceeb6da63e6e22c01b1587bc"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/a3564bd66f4bce9bc871ef18b690e2dc67a7f969",
-        "reference": "a3564bd66f4bce9bc871ef18b690e2dc67a7f969",
+        "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/6e77207f0d851862ceeb6da63e6e22c01b1587bc",
+        "reference": "6e77207f0d851862ceeb6da63e6e22c01b1587bc",
         "shasum": ""
       },
       "require": {
@@ -6737,7 +6737,7 @@
       ],
       "support": {
         "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-        "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.52.0"
+        "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.52.1"
       },
       "funding": [
         {
@@ -6745,7 +6745,7 @@
           "type": "github"
         }
       ],
-      "time": "2024-03-18T18:40:11+00:00"
+      "time": "2024-03-19T21:02:43+00:00"
     },
     {
       "name": "masterminds/html5",
@@ -7051,16 +7051,16 @@
     },
     {
       "name": "phpstan/phpstan",
-      "version": "1.10.63",
+      "version": "1.10.65",
       "source": {
         "type": "git",
         "url": "https://github.com/phpstan/phpstan.git",
-        "reference": "ad12836d9ca227301f5fb9960979574ed8628339"
+        "reference": "3c657d057a0b7ecae19cb12db446bbc99d8839c6"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ad12836d9ca227301f5fb9960979574ed8628339",
-        "reference": "ad12836d9ca227301f5fb9960979574ed8628339",
+        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3c657d057a0b7ecae19cb12db446bbc99d8839c6",
+        "reference": "3c657d057a0b7ecae19cb12db446bbc99d8839c6",
         "shasum": ""
       },
       "require": {
@@ -7109,7 +7109,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2024-03-18T16:53:53+00:00"
+      "time": "2024-03-23T10:30:26+00:00"
     },
     {
       "name": "phpunit/php-code-coverage",
@@ -7436,16 +7436,16 @@
     },
     {
       "name": "phpunit/phpunit",
-      "version": "11.0.6",
+      "version": "11.0.8",
       "source": {
         "type": "git",
         "url": "https://github.com/sebastianbergmann/phpunit.git",
-        "reference": "6af32d7938fc366f86e49a5f5ebb314018d1b1fb"
+        "reference": "48ea58408879a9aad630022186398364051482fc"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6af32d7938fc366f86e49a5f5ebb314018d1b1fb",
-        "reference": "6af32d7938fc366f86e49a5f5ebb314018d1b1fb",
+        "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/48ea58408879a9aad630022186398364051482fc",
+        "reference": "48ea58408879a9aad630022186398364051482fc",
         "shasum": ""
       },
       "require": {
@@ -7516,7 +7516,7 @@
       "support": {
         "issues": "https://github.com/sebastianbergmann/phpunit/issues",
         "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-        "source": "https://github.com/sebastianbergmann/phpunit/tree/11.0.6"
+        "source": "https://github.com/sebastianbergmann/phpunit/tree/11.0.8"
       },
       "funding": [
         {
@@ -7532,7 +7532,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2024-03-12T15:40:01+00:00"
+      "time": "2024-03-22T04:21:01+00:00"
     },
     {
       "name": "sebastian/cli-parser",
@@ -7908,16 +7908,16 @@
     },
     {
       "name": "sebastian/environment",
-      "version": "7.0.0",
+      "version": "7.1.0",
       "source": {
         "type": "git",
         "url": "https://github.com/sebastianbergmann/environment.git",
-        "reference": "100d8b855d7180f79f9a9a5c483f2d960581c3ea"
+        "reference": "4eb3a442574d0e9d141aab209cd4aaf25701b09a"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/100d8b855d7180f79f9a9a5c483f2d960581c3ea",
-        "reference": "100d8b855d7180f79f9a9a5c483f2d960581c3ea",
+        "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/4eb3a442574d0e9d141aab209cd4aaf25701b09a",
+        "reference": "4eb3a442574d0e9d141aab209cd4aaf25701b09a",
         "shasum": ""
       },
       "require": {
@@ -7932,7 +7932,7 @@
       "type": "library",
       "extra": {
         "branch-alias": {
-          "dev-main": "7.0-dev"
+          "dev-main": "7.1-dev"
         }
       },
       "autoload": {
@@ -7960,7 +7960,7 @@
       "support": {
         "issues": "https://github.com/sebastianbergmann/environment/issues",
         "security": "https://github.com/sebastianbergmann/environment/security/policy",
-        "source": "https://github.com/sebastianbergmann/environment/tree/7.0.0"
+        "source": "https://github.com/sebastianbergmann/environment/tree/7.1.0"
       },
       "funding": [
         {
@@ -7968,7 +7968,7 @@
           "type": "github"
         }
       ],
-      "time": "2024-02-02T05:57:54+00:00"
+      "time": "2024-03-23T08:56:34+00:00"
     },
     {
       "name": "sebastian/exporter",
@@ -8659,16 +8659,16 @@
     },
     {
       "name": "symfony/maker-bundle",
-      "version": "v1.56.0",
+      "version": "v1.57.0",
       "source": {
         "type": "git",
         "url": "https://github.com/symfony/maker-bundle.git",
-        "reference": "bbb7949ae048363df7c8439abeddef8befd155ce"
+        "reference": "2c90181911241648356b828b86b04fe3571aca0b"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/bbb7949ae048363df7c8439abeddef8befd155ce",
-        "reference": "bbb7949ae048363df7c8439abeddef8befd155ce",
+        "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/2c90181911241648356b828b86b04fe3571aca0b",
+        "reference": "2c90181911241648356b828b86b04fe3571aca0b",
         "shasum": ""
       },
       "require": {
@@ -8731,7 +8731,7 @@
       ],
       "support": {
         "issues": "https://github.com/symfony/maker-bundle/issues",
-        "source": "https://github.com/symfony/maker-bundle/tree/v1.56.0"
+        "source": "https://github.com/symfony/maker-bundle/tree/v1.57.0"
       },
       "funding": [
         {
@@ -8747,7 +8747,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2024-03-04T13:36:45+00:00"
+      "time": "2024-03-22T12:00:21+00:00"
     },
     {
       "name": "symfony/options-resolver",
