@@ -43,10 +43,16 @@ class Profil
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userRelation = null;
 
+    /**
+     * @var Collection<int, SpecialityLevel>
+     */
     #[Groups([User::CREATE_USER])]
     #[ORM\OneToMany(targetEntity: SpecialityLevel::class, mappedBy: 'profil', orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $specialityList;
 
+    /**
+     * @var Collection<int, TechnologyLevel>
+     */
     #[ORM\OneToMany(targetEntity: TechnologyLevel::class, mappedBy: 'profil', orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $technologyList;
 
