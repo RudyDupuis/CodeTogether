@@ -10,7 +10,7 @@
       <button class="btn-secondary ml-32">Secondary Button</button>
     </div>
 
-    <div class="f-col a-cent bg-light-shadow p-64-128 br-50">
+    <div class="f-col a-cent bg-light-shadow-large p-64-128 br-50">
       <input type="text" placeholder="Placeholder" class="mb-32" />
 
       <textarea placeholder="Placeholder" class="mb-32"></textarea>
