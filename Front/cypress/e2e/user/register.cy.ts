@@ -2,6 +2,7 @@ describe('As a user, i can register', () => {
   beforeEach(() => {
     cy.visit('/register')
     cy.contains('h1', 'Register')
+    // eslint-disable-next-line
     cy.wait(5000);
   })
   it('cannot register with a bad email', () => {
