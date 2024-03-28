@@ -36,7 +36,7 @@ final class Version20240326130128 extends AbstractMigration
         $this->addSql('CREATE TABLE technology_level (id INT NOT NULL, technology_id INT NOT NULL, profil_id INT NOT NULL, level VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_7A9926774235D463 ON technology_level (technology_id)');
         $this->addSql('CREATE INDEX IDX_7A992677275ED078 ON technology_level (profil_id)');
-        $this->addSql('CREATE TABLE "user" (id INT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE "user" (id INT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, creation_at TIMESTAMP(0) WITH TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_IDENTIFIER_EMAIL ON "user" (email)');
         $this->addSql('ALTER TABLE profil ADD CONSTRAINT FK_E6D6B2979B4D58CE FOREIGN KEY (user_relation_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE speciality_level ADD CONSTRAINT FK_484E86183B5A08D7 FOREIGN KEY (speciality_id) REFERENCES speciality (id) NOT DEFERRABLE INITIALLY IMMEDIATE');

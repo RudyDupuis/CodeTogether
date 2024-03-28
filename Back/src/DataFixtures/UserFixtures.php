@@ -14,18 +14,21 @@ class UserFixtures extends Fixture
         $user1->setEmail('john.doe@example.com');
         $user1->setRoles(['ROLE_USER']);
         $user1->setPassword('password');
+        $user1->setCreationAt();
         $manager->persist($user1);
 
         $user2 = new User();
         $user2->setEmail('jane.smith@example.com');
         $user2->setRoles(['ROLE_USER']);
         $user2->setPassword('password');
+        $user2->setCreationAt();
         $manager->persist($user2);
 
         $user3 = new User();
         $user3->setEmail('mike.jones@example.com');
         $user3->setRoles(['ROLE_USER']);
         $user3->setPassword('password');
+        $user3->setCreationAt();
         $manager->persist($user3);
 
         $manager->flush();
