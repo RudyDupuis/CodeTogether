@@ -128,6 +128,9 @@ watch(
 .secondSelect {
   padding: 4px 12px;
   width: fit-content;
+  box-shadow:
+    2px 2px 2px 0 rgba(28, 27, 32, 0.25),
+    inset 2px 2px 2px 0 rgba(28, 27, 32, 0.25);
 }
 
 li {
