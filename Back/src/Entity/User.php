@@ -52,8 +52,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $creationDate = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private ?\DateTimeImmutable $creationAt = null;
 
     #[Groups([self::CREATE_USER, self::DISPLAY_USER])]
     #[ORM\OneToOne(mappedBy: 'userRelation', cascade: ['persist', 'remove'])]
@@ -132,15 +132,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getCreationDate(): ?\DateTimeImmutable
+    public function getCreationAt(): ?\DateTimeImmutable
     {
-        return $this->creationDate;
+        return $this->creationAt;
     }
 
     #[ORM\PrePersist]
-    public function setCreationDate(): static
+    public function setCreationAt(): static
     {
-        $this->creationDate = new \DateTimeImmutable('now');
+        $this->creationAt = new \DateTimeImmutable('now');
 
         return $this;
     }
