@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Auth } from '@/entities/user/auth/Auth'
 import { validationMethods } from '@/helpers/form/Validation'
 import { ref } from 'vue'
 import CTInput from '@/components/form/CTInput.vue'
@@ -8,30 +7,32 @@ import CTDotLoader from '@/components/loader/CTDotLoader.vue'
 import LogoTitle from '@/components/svg/LogoTitle.vue'
 import { ApiMethods } from '@/helpers/entities/ApiMethods'
 import { useRouter } from 'vue-router'
+import { User } from '@/entities/User'
 
+/***** Variables ******/
 const router = useRouter()
+const apiMethods = new ApiMethods()
 
-const auth = ref<Partial<Auth>>({})
+const user = ref<Partial<User>>({})
 
 const isFormValid = ref(false)
 const isRequiredFieldCompleted = ref(false)
 const errorMessage = ref('')
 const isFormLoading = ref(false)
 
+/***** Functions ******/
 function checkIfFormValid() {
-  isRequiredFieldCompleted.value = validationMethods.validateRequiredFields(auth.value, [
+  isRequiredFieldCompleted.value = validationMethods.validateRequiredFields(user.value, [
     'email',
     'password'
   ])
   isFormValid.value = isRequiredFieldCompleted.value
 }
 
-const apiMethods = new ApiMethods()
-
 async function authRequest() {
   errorMessage.value = ''
   isFormLoading.value = true
-  const response = await apiMethods.postData('auth', auth.value)
+  const response = await apiMethods.postData('auth', user.value)
 
   if (response.token) {
     localStorage.setItem('token', response.token)
@@ -53,14 +54,14 @@ async function authRequest() {
     </section>
     <c-t-form
       :onSubmit="authRequest"
-      classValue="bg-light-shadow br-50 p-32-64 ml-128"
+      classValue="bg-light-shadow-large br-50 p-32-64 ml-128"
       :isFormValid="isFormValid"
       :isRequiredFieldCompleted="isRequiredFieldCompleted"
       :errorMessage="errorMessage"
     >
       <h1 class="txt-dark mb-32">Login</h1>
       <c-t-input
-        v-model="auth.email"
+        v-model="user.email"
         type="text"
         placeholder="Mail"
         :errorDisplay="false"
@@ -68,7 +69,7 @@ async function authRequest() {
         dataCy="login-user-email"
       />
       <c-t-input
-        v-model="auth.password"
+        v-model="user.password"
         type="password"
         placeholder="Password"
         :errorDisplay="false"

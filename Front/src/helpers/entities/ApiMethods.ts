@@ -13,7 +13,7 @@ export class ApiMethods {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/ld+json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     })
@@ -25,7 +25,7 @@ export class ApiMethods {
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/ld+json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     })
