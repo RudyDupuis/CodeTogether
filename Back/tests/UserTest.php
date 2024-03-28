@@ -20,5 +20,9 @@ class UserTest extends TestCase
         $password = 'testPassword';
         $user->setPassword($password);
         $this->assertTrue(password_verify($password, $user->getPassword()));
+
+        $creationdate = new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'));
+        $user->setCreationDate($creationdate);
+        $this->assertSame($creationdate, $user->getCreationDate());
     }
 }
