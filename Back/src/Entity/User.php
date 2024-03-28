@@ -21,6 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['email'], message: 'This email is already in use.')]
+#[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     public const DISPLAY_USER = 'display user information';
@@ -51,7 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $creationDate = null;
 
     #[Groups([self::CREATE_USER, self::DISPLAY_USER])]
@@ -136,10 +137,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->creationDate;
     }
 
-    public function setCreationDate(?\DateTimeImmutable $creationDate): static
+    #[ORM\PrePersist]
+    public function setCreationDate(): static
     {
-        $this->creationDate = $creationDate;
-        
+        $this->creationDate = new \DateTimeImmutable('now');
+
         return $this;
     }
 
