@@ -1,9 +1,16 @@
 /***** Background *****/
-.bg-light-shadow {
+.bg-light-shadow-large {
   background: $light;
   box-shadow:
     10px 10px 20px 0 $lightShadow,
     inset 15px 15px 40px 0 $darkShadow;
+}
+
+.bg-light-shadow-input {
+  background: $light;
+  box-shadow:
+    3px 3px 3px 0 $darkShadow,
+    inset 3px 3px 3px 0 $darkShadow;
 }
 
 .bg-dark {
@@ -20,6 +27,9 @@
 .br-50 {
   border-radius: 50px;
 }
+.br-5 {
+  border-radius: 5px;
+}
 
 /***** Text *****/
 .txt-dark {
@@ -28,4 +38,9 @@
 
 .txt-error {
   color: $error;
+}
+
+/****** Width Height *****/
+.input-width {
+  width: 300px;
 }

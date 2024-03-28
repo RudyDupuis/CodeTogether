@@ -2,9 +2,12 @@
 import LogoTitle from '@/components/svg/LogoTitle.vue'
 import CTForm from '@/components/form/CTForm.vue'
 import CTInput from '@/components/form/CTInput.vue'
+import type { DbSelectValues } from '@/components/form/CTDbSelect.vue'
+import CTDbSelect from '@/components/form/CTDbSelect.vue'
 import CTDotLoader from '@/components/loader/CTDotLoader.vue'
 import { useRouter } from 'vue-router'
-import type { User } from '@/entities/user/User'
+import type { User } from '@/entities/User'
+import type { Profil, SpecialityLevel } from '@/entities/Profil'
 import { ref } from 'vue'
 import {
   MAIL_ERROR_MESSAGE,
@@ -14,39 +17,71 @@ import {
   validationMethods
 } from '@/helpers/form/Validation'
 import { ApiMethods } from '@/helpers/entities/ApiMethods'
+import type { Speciality } from '@/entities/Speciality'
 
+/***** Variables ******/
 const router = useRouter()
+const apiMethods = new ApiMethods()
 
 const user = ref<Partial<User>>({})
+const profil = ref<Partial<Profil>>({})
+const specialityList = ref<Array<Speciality>>([])
+const specialityLevelList = ref<Array<Partial<SpecialityLevel>>>([])
+
+const rawSpecialityLevelValues = ref<Array<DbSelectValues>>()
 
 const isFormValid = ref(false)
 const isRequiredFieldCompleted = ref(false)
 const isMailValid = ref(true)
+const isSpecialitiesValid = ref(true)
 const isPasswordValid = ref(true)
 
 const errorMessage = ref('')
-const isFormLoading = ref(false)
+const isFormLoading = ref(true)
 
+/***** Functions ******/
 function checkIfFormValid() {
-  isRequiredFieldCompleted.value = validationMethods.validateRequiredFields(user.value, [
-    'email',
-    'password'
-  ])
+  isSpecialitiesValid.value = checkAndMakeSpecialityLevel()
+  isRequiredFieldCompleted.value =
+    validationMethods.validateRequiredFields(user.value, ['email', 'password']) &&
+    validationMethods.validateRequiredFields(profil.value, ['pseudo']) &&
+    specialityLevelList.value.length > 0
   isMailValid.value = validationMethods.validateFieldsWithRegex(user.value.email, MAIL_REGEX)
   isPasswordValid.value = validationMethods.validateFieldsWithRegex(
     user.value.password,
     PASSWORD_REGEX
   )
 
-  isFormValid.value = isRequiredFieldCompleted.value && isMailValid.value && isPasswordValid.value
+  isFormValid.value =
+    isRequiredFieldCompleted.value &&
+    isMailValid.value &&
+    isPasswordValid.value &&
+    isSpecialitiesValid.value
 }
 
-const apiMethods = new ApiMethods()
+function checkAndMakeSpecialityLevel(): boolean {
+  let isValid = true
+
+  rawSpecialityLevelValues.value?.forEach((raw) => {
+    if (raw.secondValue.value) {
+      specialityLevelList.value.push({
+        speciality: '/api/specialities/' + raw.firstValue.value,
+        level: raw.secondValue.value
+      })
+    } else {
+      isValid = false
+    }
+  })
+
+  return isValid
+}
 
 async function registerRequest() {
   errorMessage.value = ''
   isFormLoading.value = true
   user.value.roles = ['ROLE_USER']
+  profil.value.specialityList = specialityLevelList.value
+  user.value.profil = profil.value
 
   const registerResponse = await apiMethods.postData('register', user.value)
 
@@ -69,6 +104,13 @@ async function registerRequest() {
 
   isFormLoading.value = false
 }
+
+/***** Executed Code ******/
+
+apiMethods
+  .getData('specialities')
+  .then((returnedValue) => (specialityList.value = returnedValue))
+  .finally(() => (isFormLoading.value = false))
 </script>
 
 <template>
@@ -81,12 +123,20 @@ async function registerRequest() {
     </section>
     <c-t-form
       :onSubmit="registerRequest"
-      classValue="bg-light-shadow br-50 p-32-64 ml-128"
+      classValue="bg-light-shadow-large br-50 p-32-64 ml-128"
       :isFormValid="isFormValid"
       :isRequiredFieldCompleted="isRequiredFieldCompleted"
       :errorMessage="errorMessage"
     >
       <h1 class="txt-dark mb-32">Register</h1>
+      <c-t-input
+        v-model="profil.pseudo"
+        type="text"
+        placeholder="Pseudo"
+        :errorDisplay="false"
+        marginBottom="mb-16"
+        dataCy="register-user-pseudo"
+      />
       <c-t-input
         v-model="user.email"
         type="text"
@@ -95,6 +145,20 @@ async function registerRequest() {
         :errorMessage="MAIL_ERROR_MESSAGE"
         marginBottom="mb-16"
         dataCy="register-user-email"
+      />
+      <c-t-db-select
+        v-model="rawSpecialityLevelValues"
+        firstSelectTitle="Select specialities"
+        secondSelectTitle="Level"
+        :fisrtSelectChoices="specialityList.map((item) => ({ value: item.id, title: item.label }))"
+        :secondSelectChoices="[
+          { value: 'Beginner', title: 'Beginner' },
+          { value: 'Intermediate', title: 'Intermediate' },
+          { value: 'Advenced', title: 'Advenced' }
+        ]"
+        :errorDisplay="isSpecialitiesValid"
+        errorMessage="select at least one specialty and select a level for each"
+        marginBottom="mb-16"
       />
       <c-t-input
         v-model="user.password"

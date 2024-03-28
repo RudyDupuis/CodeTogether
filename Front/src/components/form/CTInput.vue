@@ -38,7 +38,7 @@ const value = computed({
 <style scoped>
 p {
   margin-top: 8px;
-  max-width: 250px;
+  max-width: 280px;
   text-align: center;
 }
 </style>
