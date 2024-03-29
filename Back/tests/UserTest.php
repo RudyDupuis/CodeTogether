@@ -11,6 +11,10 @@ class UserTest extends TestCase
     {
         $user = new User();
 
+        $user->setCreationAt();
+        $date = new \DateTimeImmutable();
+        $this->assertSame($date->getTimestamp(), $user->getCreationAt()->getTimestamp());
+
         $user->setEmail('test@example.com');
         $this->assertSame('test@example.com', $user->getEmail());
 
