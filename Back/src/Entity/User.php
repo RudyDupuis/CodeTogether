@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\Post;
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -20,6 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['email'], message: 'This email is already in use.')]
+#[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     public const DISPLAY_USER = 'display user information';
@@ -49,6 +51,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups([self::CREATE_USER])]
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private ?\DateTimeImmutable $creationAt = null;
 
     #[Groups([self::CREATE_USER, self::DISPLAY_USER])]
     #[ORM\OneToOne(mappedBy: 'userRelation', cascade: ['persist', 'remove'])]
@@ -125,6 +130,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getCreationAt(): ?\DateTimeImmutable
+    {
+        return $this->creationAt;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreationAt(): static
+    {
+        $this->creationAt = new \DateTimeImmutable('now');
+
+        return $this;
     }
 
     public function getProfil(): ?Profil
