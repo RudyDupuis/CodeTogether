@@ -4,7 +4,7 @@ import PictoProfile from '@/components/svg/PictoProfile.vue'
 </script>
 
 <template>
-  <header class="f f-row j-betw a-cent p-8-16" id="globalHeader">
+  <header class="f f-row j-betw a-cent p-8-16">
     <router-link :to="{ name: 'home' }">
       <CTLogo />
     </router-link>
@@ -25,7 +25,7 @@ import PictoProfile from '@/components/svg/PictoProfile.vue'
 </template>
 
 <style scoped>
-#globalHeader {
+header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
