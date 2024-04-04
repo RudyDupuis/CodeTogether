@@ -5,6 +5,7 @@ import CTInput from '@/components/form/CTInput.vue'
 import CTForm from '@/components/form/CTForm.vue'
 import CTDotLoader from '@/components/loader/CTDotLoader.vue'
 import LogoTitle from '@/components/svg/LogoTitle.vue'
+import CTHeader from '@/components/header/CTHeader.vue'
 import { ApiMethods } from '@/helpers/entities/ApiMethods'
 import { useRouter } from 'vue-router'
 import { User } from '@/entities/User'
@@ -45,6 +46,11 @@ async function authRequest() {
 </script>
 
 <template>
+
+  <header>
+    <c-t-header></c-t-header>
+  </header>
+
   <main class="f a-cent j-cent">
     <section class="f-col a-cent">
       <logo-title class="mb-128" />
