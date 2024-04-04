@@ -1,4 +1,10 @@
+<script setup lang="ts">
+import CTHeader from '@/components/header/CTHeader.vue'
+</script>
+
 <template>
+  <CTHeader></CTHeader>
+
   <main class="f-col a-cent p-64-0">
     <img src="../assets/images/logo-small.svg" class="mb-64" />
     <h1 class="mb-16">Code Together in H1</h1>

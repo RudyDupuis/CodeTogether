@@ -1,41 +1,48 @@
 <script setup lang="ts">
-import LogoTitle from '@/components/svg/LogoTitle.vue'
-import LogoProfile from '@/components/svg/LogoProfile.vue'
+import CTLogo from '@/components/svg/CTLogo.vue'
+import PictoProfile from '@/components/svg/PictoProfile.vue'
 </script>
 
 <template>
-    <div class="f f-row j-betw a-cent p-8-16" style="border-bottom: 1px solid rgba(255, 255, 255, 0.5);">
+  <header class="f f-row j-betw a-cent p-8-16" id="globalHeader">
+    <router-link :to="{ name: 'home' }">
+      <CTLogo />
+    </router-link>
 
-        <router-link :to="{ name: 'login' }">
-            <logo-title/>
-        </router-link>
+    <nav class="f f-row j-betw">
+      <router-link :to="{ name: 'home' }">
+        <p>Find a project</p>
+      </router-link>
+      <router-link :to="{ name: 'home' }">
+        <p id="navbarItem">My projects</p>
+      </router-link>
+    </nav>
 
-        <div class="f f-row j-betw" style="margin-top: 16px; width: 35vw;">
-            <router-link :to="{ name: 'register' }">
-                <p>Find a project</p>
-            </router-link>
-            <router-link :to="{ name: 'register' }">
-                <p>My projects</p>
-            </router-link>
-        </div>
-
-        <router-link :to="{ name: 'login' }">
-            <LogoProfile/>
-        </router-link>   
-
-    </div>
+    <router-link :to="{ name: 'home' }">
+      <PictoProfile />
+    </router-link>
+  </header>
 </template>
 
 <style scoped>
+#globalHeader {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
 
-  p {
-    font-size: 22px;
-    @media (max-width: 1000px) {
-        font-size: 18px !important;
-    }
-    @media (max-width: 700px) {
-        font-size: 15px !important;
-    }
+#navbarItem {
+  margin-left: 128px;
+  @media (max-width: 800px) {
+    margin-left: 64px;
   }
+}
 
+p {
+  font-size: 18px;
+  @media (max-width: 1000px) {
+    font-size: 18px;
+  }
+  @media (max-width: 700px) {
+    font-size: 15px;
+  }
+}
 </style>
