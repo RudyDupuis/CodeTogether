@@ -1,7 +1,7 @@
 <template>
   <svg
-    width="382"
-    height="113"
+    width="45"
+    height="45"
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 700 697"
@@ -20,22 +20,3 @@
     />
   </svg>
 </template>
-
-<style scoped>
-svg {
-  @media (max-width: 600px) {
-    width: 267px;
-    height: 79px;
-  }
-}
-
-header svg {
-  width: 120px;
-  height: 45px;
-  margin-top: 16px;
-  @media (max-width: 700px) {
-    width: 70px;
-    height: 35px;
-  }
-}
-</style>

@@ -6,6 +6,8 @@
     viewBox="0 0 948 626"
     enable-background="new 0 0 948 626"
     xml:space="preserve"
+    width="65"
+    height="45"
   >
     <path
       fill="#1D1C20"
@@ -227,17 +229,3 @@
     />
   </svg>
 </template>
-
-<style scoped>
-header svg {
-  width: 110px;
-  height: 60px;
-  margin-left: 32px;
-  margin-top: 16px;
-  @media (max-width: 700px) {
-    margin-left: 16px;
-    width: 85px;
-    height: 45px;
-  }
-}
-</style>
