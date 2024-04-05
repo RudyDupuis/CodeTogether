@@ -34,7 +34,7 @@ header svg {
   height: 45px;
   margin-top: 16px;
   @media (max-width: 700px) {
-    width: 90px;
+    width: 70px;
     height: 35px;
   }
 }

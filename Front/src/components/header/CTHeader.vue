@@ -39,10 +39,10 @@ header {
 p {
   font-size: 18px;
   @media (max-width: 1000px) {
-    font-size: 18px;
+    font-size: 16px;
   }
   @media (max-width: 700px) {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 </style>
