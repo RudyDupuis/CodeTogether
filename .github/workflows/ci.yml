@@ -73,6 +73,9 @@ jobs:
           POSTGRES_PASSWORD: cedb55
           POSTGRES_DB: coderensembledb
 
+    env:
+      DATABASE_URL: postgresql://admincoderensemble:cedb55@localhost:5432/coderensembledb?serverVersion=16&charset=utf8
+
     steps:
       - name: Checkout du code
         uses: actions/checkout@v2
