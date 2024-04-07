@@ -16,25 +16,22 @@ jobs:
         working-directory: Front
 
     steps:
-      - name: Checkout du code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Installation de Node
+      - name: Installing Node
         uses: actions/setup-node@v2
 
-      - name: Installation des dépendances
+      - name: Installing dependencies
         run: npm install
 
-      - name: Analyse du code
+      - name: Code analysis
         run: npm run analyse
 
       - name: Format
         run: |
           npm run format
           git diff --exit-code || (echo "Il y a des avertissements dans le format" && exit 1)
-
-      - name: Tests E2E
-        run: npm run test:e2e
 
   back-testing:
     runs-on: ubuntu-latest
@@ -43,7 +40,7 @@ jobs:
         working-directory: Back
 
     steps:
-      - name: Checkout du code
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up PHP
@@ -51,14 +48,62 @@ jobs:
         with:
           php-version: "8.2"
 
-      - name: Installation des dépendances
+      - name: Installing dependencies
         run: composer install
 
-      - name: Analyse du code
+      - name: Code analysis
         run: composer analyse
 
       - name: Format
         run: composer format:check
 
-      - name: Tests Unitaires
+      - name: Unit tests
         run: composer test:unit
+
+  e2e-testing:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: admincoderensemble
+          POSTGRES_PASSWORD: cedb55
+          POSTGRES_DB: coderensembledb
+
+    env:
+      DATABASE_URL: postgresql://admincoderensemble:cedb55@localhost:5432/coderensembledb?serverVersion=16&charset=utf8
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Installing Node
+        uses: actions/setup-node@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
+      - name: Installing dependencies Front
+        working-directory: Front
+        run: npm install
+
+      - name: Installing dependencies Back
+        working-directory: Back
+        run: composer install
+
+      - name: Migrations Doctrine
+        working-directory: Back
+        run: php bin/console doctrine:migrations:migrate --no-interaction
+
+      - name: Adding fixtures
+        working-directory: Back
+        run: php bin/console doctrine:fixtures:load --no-interaction
+
+      - name: E2e tests
+        working-directory: Front
+        run: npm run test:e2e

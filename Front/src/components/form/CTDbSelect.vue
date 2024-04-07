@@ -92,7 +92,7 @@ watch(
 
 <template>
   <section :class="marginBottom">
-    <select class="mb-8" @change="addFirstSelectedValue">
+    <select class="mb-8" @change="addFirstSelectedValue" data-cy="ct-db-select">
       <option disabled selected>{{ firstSelectTitle }}</option>
       <option
         v-for="choice in filteredFisrtSelectChoices"
@@ -104,13 +104,17 @@ watch(
     </select>
     <ul v-if="selectedValues.length > 0" class="bg-light-shadow-input br-5 input-width p-8-16">
       <li
-        v-for="value in selectedValues"
+        v-for="(value, index) in selectedValues"
         :key="value.firstValue.title"
         class="txt-dark f a-cent j-betw"
       >
         {{ value.firstValue.title }}
         <div class="f a-cent">
-          <select class="secondSelect" @change="addSecondSelectedValue($event, value)">
+          <select
+            class="secondSelect"
+            @change="addSecondSelectedValue($event, value)"
+            :data-cy="'ct-second-select-' + index"
+          >
             <option disabled selected>{{ secondSelectTitle }}</option>
             <option v-for="choice in secondSelectChoices" :key="choice.title" :value="choice.value">
               {{ choice.title }}
