@@ -16,16 +16,16 @@ jobs:
         working-directory: Front
 
     steps:
-      - name: Checkout du code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Installation de Node
+      - name: Installing Node
         uses: actions/setup-node@v2
 
-      - name: Installation des dépendances
+      - name: Installing dependencies
         run: npm install
 
-      - name: Analyse du code
+      - name: Code analysis
         run: npm run analyse
 
       - name: Format
@@ -40,7 +40,7 @@ jobs:
         working-directory: Back
 
     steps:
-      - name: Checkout du code
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up PHP
@@ -48,16 +48,16 @@ jobs:
         with:
           php-version: "8.2"
 
-      - name: Installation des dépendances
+      - name: Installing dependencies
         run: composer install
 
-      - name: Analyse du code
+      - name: Code analysis
         run: composer analyse
 
       - name: Format
         run: composer format:check
 
-      - name: Tests Unitaires
+      - name: Unit tests
         run: composer test:unit
 
   e2e-testing:
@@ -77,10 +77,10 @@ jobs:
       DATABASE_URL: postgresql://admincoderensemble:cedb55@localhost:5432/coderensembledb?serverVersion=16&charset=utf8
 
     steps:
-      - name: Checkout du code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Installation de Node
+      - name: Installing Node
         uses: actions/setup-node@v2
 
       - name: Set up PHP
@@ -88,11 +88,11 @@ jobs:
         with:
           php-version: "8.2"
 
-      - name: Installation des dépendances Front
+      - name: Installing dependencies Front
         working-directory: Front
         run: npm install
 
-      - name: Installation des dépendances Back
+      - name: Installing dependencies Back
         working-directory: Back
         run: composer install
 
@@ -100,10 +100,10 @@ jobs:
         working-directory: Back
         run: php bin/console doctrine:migrations:migrate --no-interaction
 
-      - name: Ajout des fixtures
+      - name: Adding fixtures
         working-directory: Back
         run: php bin/console doctrine:fixtures:load --no-interaction
 
-      - name: Lancement des tests e2e
+      - name: E2e tests
         working-directory: Front
         run: npm run test:e2e
