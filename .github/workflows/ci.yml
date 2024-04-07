@@ -33,9 +33,6 @@ jobs:
           npm run format
           git diff --exit-code || (echo "Il y a des avertissements dans le format" && exit 1)
 
-      - name: Tests E2E
-        run: npm run test:e2e
-
   back-testing:
     runs-on: ubuntu-latest
     defaults:
@@ -62,3 +59,38 @@ jobs:
 
       - name: Tests Unitaires
         run: composer test:unit
+
+  e2e-testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v2
+
+      - name: Installation de Node
+        uses: actions/setup-node@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
+      - name: Installation des dépendances Front
+        working-directory: Front
+        run: npm install
+
+      - name: Installation des dépendances Back
+        working-directory: Back
+        run: composer install
+
+      - name: Migrations Doctrine
+        working-directory: Back
+        run: php bin/console doctrine:migrations:migrate --no-interaction
+
+      - name: Ajout des fixtures
+        working-directory: Back
+        run: php bin/console doctrine:fixtures:load --no-interaction
+
+      - name: Lancement des tests e2e
+        working-directory: Front
+        run: npm run test:e2e
