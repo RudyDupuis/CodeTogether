@@ -63,6 +63,16 @@ jobs:
   e2e-testing:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: admincoderensemble
+          POSTGRES_PASSWORD: cedb55
+          POSTGRES_DB: coderensembledb
+
     steps:
       - name: Checkout du code
         uses: actions/checkout@v2
