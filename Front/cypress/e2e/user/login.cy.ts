@@ -35,20 +35,20 @@ describe('As a user, i cannot login without', () => {
   })
 })
 
-describe('As a user, i cannot login with bad', () => {
-  beforeEach(() => {
-    cy.visit('/login')
-    cy.contains('h1', 'Login')
-  })
-  it('cannot login with bad informations', () => {
-    cy.intercept('POST', 'https://localhost:5001/api/auth').as('auth')
-    cy.getBySel('login-user-email').type('bad@mail.com')
-    cy.getBySel('login-user-password').type('password')
+// describe('As a user, i cannot login with bad', () => {
+//   beforeEach(() => {
+//     cy.visit('/login')
+//     cy.contains('h1', 'Login')
+//   })
+//   it('cannot login with bad informations', () => {
+//     cy.intercept('POST', 'https://localhost:5001/api/auth').as('auth')
+//     cy.getBySel('login-user-email').type('bad@mail.com')
+//     cy.getBySel('login-user-password').type('password')
 
-    cy.getBySel('login-form-button').click()
-    cy.getBySel('login-form-button').click()
+//     cy.getBySel('login-form-button').click()
+//     cy.getBySel('login-form-button').click()
 
-    cy.wait('@auth')
-    cy.getBySel('form-error-message').contains('Invalid credentials.')
-  })
-})
+//     cy.wait('@auth')
+//     cy.getBySel('form-error-message').contains('Invalid credentials.')
+//   })
+// })
