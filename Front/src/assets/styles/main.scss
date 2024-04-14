@@ -78,6 +78,13 @@ main {
   min-height: 100vh;
 }
 
+header {
+  height: 90px;
+}
+
+.full-height-minus-header {
+  min-height: calc(100vh - 90px);
+}
 @import './helpers/backgound-text.scss';
 @import './helpers/display.scss';
 @import './helpers/padding-marging.scss';
