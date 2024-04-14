@@ -4,7 +4,7 @@ import PictoProfile from '@/components/svg/PictoProfile.vue'
 </script>
 
 <template>
-  <header class="f f-row j-betw a-cent p-0-64">
+  <header class="f f-row j-betw a-cent p-0-64 light-border-bottom">
     <router-link :to="{ name: 'home' }">
       <CTLogo />
     </router-link>
@@ -18,7 +18,7 @@ import PictoProfile from '@/components/svg/PictoProfile.vue'
       </router-link>
     </nav>
 
-    <router-link :to="{ name: 'login' }">
+    <router-link :to="{ name: 'my-profile' }">
       <PictoProfile />
     </router-link>
   </header>
@@ -26,8 +26,6 @@ import PictoProfile from '@/components/svg/PictoProfile.vue'
 
 <style scoped>
 header {
-  min-height: 90px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   @media (max-width: 460px) {
     padding: 0 32px;
   }
