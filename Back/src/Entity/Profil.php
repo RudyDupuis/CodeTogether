@@ -6,9 +6,15 @@ use App\Repository\ProfilRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProfilRepository::class)]
+#[UniqueEntity(
+    fields: ['pseudo'],
+    message: 'This name has already been taken',
+)]
 class Profil
 {
     #[Groups([User::DISPLAY_USER])]
@@ -37,6 +43,7 @@ class Profil
     private ?string $profilPicture = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Choice(choices: ['Open to work', 'Not available'])]
     private ?string $availability = null;
 
     #[ORM\OneToOne(inversedBy: 'profil', cascade: ['persist', 'remove'])]

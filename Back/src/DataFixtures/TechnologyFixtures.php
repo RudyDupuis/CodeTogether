@@ -27,6 +27,7 @@ class TechnologyFixtures extends Fixture
             $technology = new Technology();
             $technology->setLabel($technologiesList[$i]);
             $manager->persist($technology);
+            $this->addReference('technology'.$i, $technology);
         }
 
         $manager->flush();
