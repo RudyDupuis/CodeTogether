@@ -11,10 +11,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProfilRepository::class)]
-#[UniqueEntity(
-    fields: ['pseudo'],
-    message: 'This name has already been taken',
-)]
+#[ORM\UniqueConstraint(name: 'UNIQ_PROFIL_PSEUDO', fields: ['pseudo'])]
+#[UniqueEntity(fields: ['pseudo'], message: 'This name has already been taken')]
 class Profil
 {
     #[Groups([User::DISPLAY_USER])]
