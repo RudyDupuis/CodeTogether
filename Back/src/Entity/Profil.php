@@ -23,6 +23,7 @@ class Profil
 
     #[Groups([User::CREATE_USER, User::DISPLAY_USER])]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'You must choose a pseudo')]
     private ?string $pseudo = null;
 
     #[ORM\Column(length: 255, nullable: true)]
