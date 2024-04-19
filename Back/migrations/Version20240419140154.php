@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240416070515 extends AbstractMigration
+final class Version20240419140154 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -26,7 +26,7 @@ final class Version20240416070515 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE technology_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE technology_level_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE profil (id INT NOT NULL, user_relation_id INT NOT NULL, pseudo VARCHAR(255) NOT NULL, linkedin_link VARCHAR(255) DEFAULT NULL, portfolio_link VARCHAR(255) DEFAULT NULL, repository_link VARCHAR(255) DEFAULT NULL, description VARCHAR(255) DEFAULT NULL, profil_picture VARCHAR(255) DEFAULT NULL, availability VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE profil (id INT NOT NULL, user_relation_id INT NOT NULL, pseudo VARCHAR(255) NOT NULL, linkedin_link VARCHAR(255) DEFAULT NULL, portfolio_link VARCHAR(255) DEFAULT NULL, repository_link VARCHAR(255) DEFAULT NULL, description VARCHAR(1000) DEFAULT NULL, profil_picture VARCHAR(255) DEFAULT NULL, availability VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_E6D6B2979B4D58CE ON profil (user_relation_id)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_PROFIL_PSEUDO ON profil (pseudo)');
         $this->addSql('CREATE TABLE speciality (id INT NOT NULL, label VARCHAR(255) NOT NULL, PRIMARY KEY(id))');

@@ -22,7 +22,10 @@ class SpecialityLevel
 
     #[Groups([User::CREATE_USER])]
     #[ORM\Column(length: 255)]
-    #[Assert\Choice(choices: ['Beginner', 'Intermediate', 'Advanced'])]
+    #[Assert\Choice(
+        choices: ['Beginner', 'Intermediate', 'Advanced'],
+        message: 'Level must be Beginner, Intermediate or Advanced'
+    )]
     private ?string $level = null;
 
     #[ORM\ManyToOne(inversedBy: 'specialityList')]

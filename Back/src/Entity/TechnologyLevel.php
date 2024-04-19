@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TechnologyLevelRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TechnologyLevelRepository::class)]
@@ -14,12 +15,17 @@ class TechnologyLevel
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups([User::CREATE_USER])]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Technology $technology = null;
 
+    #[Groups([User::CREATE_USER])]
     #[ORM\Column(length: 255)]
-    #[Assert\Choice(choices: ['Beginner', 'Intermediate', 'Advanced'])]
+    #[Assert\Choice(
+        choices: ['Beginner', 'Intermediate', 'Advanced'],
+        message: 'Level must be Beginner, Intermediate or Advanced'
+    )]
     private ?string $level = null;
 
     #[ORM\ManyToOne(inversedBy: 'technologyList')]

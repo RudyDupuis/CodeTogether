@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProfilRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_PROFIL_PSEUDO', fields: ['pseudo'])]
-#[UniqueEntity(fields: ['pseudo'], message: 'This name has already been taken')]
+#[UniqueEntity(fields: ['pseudo'], message: 'This pseudo has already been taken')]
 class Profil
 {
     #[Groups([User::DISPLAY_USER])]
@@ -34,7 +34,11 @@ class Profil
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $repositoryLink = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
+    #[Assert\Length(
+        max: 1000,
+        maxMessage: 'Description cannot be longer than {{ limit } characters'
+    )]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -53,12 +57,15 @@ class Profil
      */
     #[Groups([User::CREATE_USER])]
     #[ORM\OneToMany(targetEntity: SpecialityLevel::class, mappedBy: 'profil', orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[Assert\Valid]
     private Collection $specialityList;
 
     /**
      * @var Collection<int, TechnologyLevel>
      */
+    #[Groups([User::CREATE_USER])]
     #[ORM\OneToMany(targetEntity: TechnologyLevel::class, mappedBy: 'profil', orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[Assert\Valid]
     private Collection $technologyList;
 
     public function __construct()
