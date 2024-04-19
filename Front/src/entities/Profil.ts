@@ -2,7 +2,7 @@ import type { Speciality } from './Speciality'
 import type { Technology } from './Technology'
 import type { User } from './User'
 
-export class Profile {
+export class Profil {
   constructor(
     public id: number,
     public pseudo: string,
@@ -23,7 +23,7 @@ export class SpecialityLevel {
     public id: number,
     public speciality: Speciality | string,
     public level: 'Beginner' | 'Intermediate' | 'Advanced',
-    public profile: Profile
+    public profil: Profil
   ) {}
 }
 
@@ -32,6 +32,6 @@ export class TechnologyLevel {
     public id: number,
     public technology: Technology,
     public level: 'Beginner' | 'Intermediate' | 'Advanced',
-    public profile: Profile
+    public profil: Profil
   ) {}
 }

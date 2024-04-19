@@ -7,7 +7,7 @@ import CTDbSelect from '@/components/form/CTDbSelect.vue'
 import CTDotLoader from '@/components/loader/CTDotLoader.vue'
 import { useRouter } from 'vue-router'
 import type { User } from '@/entities/User'
-import type { Profile, SpecialityLevel } from '@/entities/Profile'
+import type { Profil, SpecialityLevel } from '@/entities/Profil'
 import { ref } from 'vue'
 import {
   MAIL_ERROR_MESSAGE,
@@ -24,7 +24,7 @@ const router = useRouter()
 const apiMethods = new ApiMethods()
 
 const user = ref<Partial<User>>({})
-const profile = ref<Partial<Profile>>({})
+const profil = ref<Partial<Profil>>({})
 const specialityList = ref<Array<Speciality>>([])
 const specialityLevelList = ref<Array<Partial<SpecialityLevel>>>([])
 
@@ -44,7 +44,7 @@ function checkIfFormValid() {
   isSpecialitiesValid.value = checkAndMakeSpecialityLevel()
   isRequiredFieldCompleted.value =
     validationMethods.validateRequiredFields(user.value, ['email', 'password']) &&
-    validationMethods.validateRequiredFields(profile.value, ['pseudo']) &&
+    validationMethods.validateRequiredFields(profil.value, ['pseudo']) &&
     specialityLevelList.value.length > 0
   isMailValid.value = validationMethods.validateFieldsWithRegex(user.value.email, MAIL_REGEX)
   isPasswordValid.value = validationMethods.validateFieldsWithRegex(
@@ -80,8 +80,8 @@ async function registerRequest() {
   errorMessage.value = ''
   isFormLoading.value = true
   user.value.roles = ['ROLE_USER']
-  profile.value.specialityList = specialityLevelList.value
-  user.value.profile = profile.value
+  profil.value.specialityList = specialityLevelList.value
+  user.value.profil = profil.value
 
   const registerResponse = await apiMethods.postData('register', user.value)
 
@@ -130,7 +130,7 @@ apiMethods
     >
       <h1 class="txt-dark mb-32">Register</h1>
       <c-t-input
-        v-model="profile.pseudo"
+        v-model="profil.pseudo"
         type="text"
         placeholder="Pseudo"
         :errorDisplay="false"
