@@ -57,6 +57,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Groups([self::CREATE_USER, self::DISPLAY_USER])]
     #[ORM\OneToOne(mappedBy: 'userRelation', cascade: ['persist', 'remove'])]
+    #[Assert\Valid]
     private ?Profil $profil = null;
 
     public function getId(): ?int

@@ -22,6 +22,7 @@ class SpecialityFixtures extends Fixture
             $speciality = new Speciality();
             $speciality->setLabel($specialitiesList[$i]);
             $manager->persist($speciality);
+            $this->addReference('SPECIALITY_'.$i, $speciality);
         }
 
         $manager->flush();

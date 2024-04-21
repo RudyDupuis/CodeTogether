@@ -6,9 +6,13 @@ use App\Repository\ProfilRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProfilRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_PROFIL_PSEUDO', fields: ['pseudo'])]
+#[UniqueEntity(fields: ['pseudo'], message: 'This pseudo has already been taken')]
 class Profil
 {
     #[Groups([User::DISPLAY_USER])]
@@ -19,6 +23,7 @@ class Profil
 
     #[Groups([User::CREATE_USER, User::DISPLAY_USER])]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'You must choose a pseudo')]
     private ?string $pseudo = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -30,13 +35,18 @@ class Profil
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $repositoryLink = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
+    #[Assert\Length(
+        max: 1000,
+        maxMessage: 'Description cannot be longer than {{ limit } characters'
+    )]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profilPicture = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Choice(choices: ['Open to work', 'Not available'])]
     private ?string $availability = null;
 
     #[ORM\OneToOne(inversedBy: 'profil', cascade: ['persist', 'remove'])]
@@ -48,12 +58,15 @@ class Profil
      */
     #[Groups([User::CREATE_USER])]
     #[ORM\OneToMany(targetEntity: SpecialityLevel::class, mappedBy: 'profil', orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[Assert\Valid]
     private Collection $specialityList;
 
     /**
      * @var Collection<int, TechnologyLevel>
      */
+    #[Groups([User::CREATE_USER])]
     #[ORM\OneToMany(targetEntity: TechnologyLevel::class, mappedBy: 'profil', orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[Assert\Valid]
     private Collection $technologyList;
 
     public function __construct()
