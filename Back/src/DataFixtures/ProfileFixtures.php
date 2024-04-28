@@ -2,20 +2,20 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Profil;
+use App\Entity\Profile;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class ProfileFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const PROFILE_1 = 'profil1';
-    public const PROFILE_2 = 'profil2';
-    public const PROFILE_3 = 'profil3';
+    public const PROFILE_1 = 'profile1';
+    public const PROFILE_2 = 'profile2';
+    public const PROFILE_3 = 'profile3';
 
     public function load(ObjectManager $manager): void
     {
-        $profile1 = new Profil();
+        $profile1 = new Profile();
         $profile1->setPseudo('Visionnaire_agile');
         $profile1->setLinkedinLink('https://www.linkedin.com/in/jordan-robin-ba6b73113/');
         $profile1->setRepositoryLink('https://github.com/Jordan-Robin?tab=repositories');
@@ -24,7 +24,7 @@ class ProfileFixtures extends Fixture implements DependentFixtureInterface
         $profile1->setUserRelation($this->getReference(UserFixtures::USER_1));
         $manager->persist($profile1);
 
-        $profile2 = new Profil();
+        $profile2 = new Profile();
         $profile2->setPseudo('Pierre_Robert');
         $profile2->setLinkedinLink('https://www.linkedin.com/in/jordan-robin-ba6b73113/');
         $profile2->setDescription("Avec 5 ans d'expérience en développement full-stack, j'ai dirigé des équipes pour livrer des projets web innovants. J'ai optimisé les performances et la sécurité, garantissant des produits de haute qualité.");
@@ -32,7 +32,7 @@ class ProfileFixtures extends Fixture implements DependentFixtureInterface
         $profile2->setUserRelation($this->getReference(UserFixtures::USER_2));
         $manager->persist($profile2);
 
-        $profile3 = new Profil();
+        $profile3 = new Profile();
         $profile3->setPseudo('MagicienDuFrontEnd');
         $profile3->setLinkedinLink('https://www.linkedin.com/in/jordan-robin-ba6b73113/');
         $profile3->setDescription("En tant que développeur web senior, j'ai géré des projets complexes pour des clients internationaux pendant plus de 8 ans. J'ai mis en œuvre des solutions évolutives et intégrées, dépassant les attentes des clients.");

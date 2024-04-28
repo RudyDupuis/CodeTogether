@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     public const DISPLAY_USER = 'display user information';
-    public const CREATE_USER = 'create user and profil entity';
+    public const CREATE_USER = 'create user and profile entity';
 
     #[Groups([self::DISPLAY_USER])]
     #[ORM\Id]
@@ -58,7 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups([self::CREATE_USER, self::DISPLAY_USER])]
     #[ORM\OneToOne(mappedBy: 'userRelation', cascade: ['persist', 'remove'])]
     #[Assert\Valid]
-    private ?Profil $profil = null;
+    private ?Profile $profile = null;
 
     public function getId(): ?int
     {
@@ -146,19 +146,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getProfil(): ?Profil
+    public function getProfile(): ?Profile
     {
-        return $this->profil;
+        return $this->profile;
     }
 
-    public function setProfil(Profil $profil): static
+    public function setProfile(Profile $profile): static
     {
         // set the owning side of the relation if necessary
-        if ($profil->getUserRelation() !== $this) {
-            $profil->setUserRelation($this);
+        if ($profile->getUserRelation() !== $this) {
+            $profile->setUserRelation($this);
         }
 
-        $this->profil = $profil;
+        $this->profile = $profile;
 
         return $this;
     }

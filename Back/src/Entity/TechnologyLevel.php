@@ -30,7 +30,7 @@ class TechnologyLevel
 
     #[ORM\ManyToOne(inversedBy: 'technologyList')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Profil $profil = null;
+    private ?Profile $profile = null;
 
     public function getId(): ?int
     {
@@ -61,14 +61,14 @@ class TechnologyLevel
         return $this;
     }
 
-    public function getProfil(): ?Profil
+    public function getProfile(): ?Profile
     {
-        return $this->profil;
+        return $this->profile;
     }
 
-    public function setProfil(?Profil $profil): static
+    public function setProfile(?Profile $profile): static
     {
-        $this->profil = $profil;
+        $this->profile = $profile;
 
         return $this;
     }
