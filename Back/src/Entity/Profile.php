@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\ProfilRepository;
+use App\Repository\ProfileRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,10 +10,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: ProfilRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_PROFIL_PSEUDO', fields: ['pseudo'])]
+#[ORM\Entity(repositoryClass: ProfileRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_PROFILE_PSEUDO', fields: ['pseudo'])]
 #[UniqueEntity(fields: ['pseudo'], message: 'This pseudo has already been taken')]
-class Profil
+class Profile
 {
     #[Groups([User::DISPLAY_USER])]
     #[ORM\Id]
@@ -43,13 +43,13 @@ class Profil
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $profilPicture = null;
+    private ?string $profilePicture = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Choice(choices: ['Open to work', 'Not available'])]
     private ?string $availability = null;
 
-    #[ORM\OneToOne(inversedBy: 'profil', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'profile', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userRelation = null;
 
@@ -57,7 +57,7 @@ class Profil
      * @var Collection<int, SpecialityLevel>
      */
     #[Groups([User::CREATE_USER])]
-    #[ORM\OneToMany(targetEntity: SpecialityLevel::class, mappedBy: 'profil', orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(targetEntity: SpecialityLevel::class, mappedBy: 'profile', orphanRemoval: true, cascade: ['persist', 'remove'])]
     #[Assert\Valid]
     private Collection $specialityList;
 
@@ -65,7 +65,7 @@ class Profil
      * @var Collection<int, TechnologyLevel>
      */
     #[Groups([User::CREATE_USER])]
-    #[ORM\OneToMany(targetEntity: TechnologyLevel::class, mappedBy: 'profil', orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(targetEntity: TechnologyLevel::class, mappedBy: 'profile', orphanRemoval: true, cascade: ['persist', 'remove'])]
     #[Assert\Valid]
     private Collection $technologyList;
 
@@ -140,14 +140,14 @@ class Profil
         return $this;
     }
 
-    public function getProfilPicture(): ?string
+    public function getProfilePicture(): ?string
     {
-        return $this->profilPicture;
+        return $this->profilePicture;
     }
 
-    public function setProfilPicture(?string $profilPicture): static
+    public function setProfilePicture(?string $profilePicture): static
     {
-        $this->profilPicture = $profilPicture;
+        $this->profilePicture = $profilePicture;
 
         return $this;
     }
@@ -188,7 +188,7 @@ class Profil
     {
         if (!$this->specialityList->contains($specialityList)) {
             $this->specialityList->add($specialityList);
-            $specialityList->setProfil($this);
+            $specialityList->setProfile($this);
         }
 
         return $this;
@@ -198,8 +198,8 @@ class Profil
     {
         if ($this->specialityList->removeElement($specialityList)) {
             // set the owning side to null (unless already changed)
-            if ($specialityList->getProfil() === $this) {
-                $specialityList->setProfil(null);
+            if ($specialityList->getProfile() === $this) {
+                $specialityList->setProfile(null);
             }
         }
 
@@ -218,7 +218,7 @@ class Profil
     {
         if (!$this->technologyList->contains($technologyList)) {
             $this->technologyList->add($technologyList);
-            $technologyList->setProfil($this);
+            $technologyList->setProfile($this);
         }
 
         return $this;
@@ -228,8 +228,8 @@ class Profil
     {
         if ($this->technologyList->removeElement($technologyList)) {
             // set the owning side to null (unless already changed)
-            if ($technologyList->getProfil() === $this) {
-                $technologyList->setProfil(null);
+            if ($technologyList->getProfile() === $this) {
+                $technologyList->setProfile(null);
             }
         }
 
