@@ -1,31 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { defineProps } from 'vue'
-
-interface Props {
-  modelValue: string | undefined
+defineProps<{
   type: string
   placeholder: string
   errorMessage?: string
   errorDisplay: boolean
   marginBottom: string
   dataCy: string
-}
-
-const props = defineProps<Props>()
-
-const emit = defineEmits<{
-  'update:modelValue': [value: string | undefined]
 }>()
 
-const value = computed({
-  get() {
-    return props.modelValue
-  },
-  set(value) {
-    emit('update:modelValue', value)
-  }
-})
+const value = defineModel()
 </script>
 
 <template>
