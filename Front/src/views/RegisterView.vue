@@ -2,7 +2,7 @@
 import LogoTitle from '@/components/svg/LogoTitle.vue'
 import CTForm from '@/components/form/CTForm.vue'
 import CTInput from '@/components/form/CTInput.vue'
-import type { DbSelectValues } from '@/components/form/CTDbSelect.vue'
+import type { DbSelectValues, Choice } from '@/components/form/CTDbSelect.vue'
 import CTDbSelect from '@/components/form/CTDbSelect.vue'
 import CTDotLoader from '@/components/loader/CTDotLoader.vue'
 import { useRouter } from 'vue-router'
@@ -25,7 +25,7 @@ const apiMethods = new ApiMethods()
 
 const user = ref<Partial<User>>({})
 const profile = ref<Partial<Profile>>({})
-const specialityList = ref<Array<Speciality>>([])
+const firstChoiceSpecialityList = ref<Array<Choice>>([])
 const specialityLevelList = ref<Array<Partial<SpecialityLevel>>>([])
 
 const rawSpecialityLevelValues = ref<Array<DbSelectValues>>()
@@ -93,7 +93,7 @@ async function registerRequest() {
 
     if (authResponse.token) {
       localStorage.setItem('token', authResponse.token)
-      router.push({ name: 'home' })
+      await router.push({ name: 'home' })
     } else {
       errorMessage.value =
         'An error occurred while creating the token please log in to the login page'
@@ -106,10 +106,14 @@ async function registerRequest() {
 }
 
 /***** Executed Code ******/
-
 apiMethods
   .getData('specialities')
-  .then((returnedValue) => (specialityList.value = returnedValue))
+  .then((specialityList: Speciality[]) => {
+    firstChoiceSpecialityList.value = specialityList.map((item) => ({
+      value: item.id,
+      title: item.label
+    }))
+  })
   .finally(() => (isFormLoading.value = false))
 </script>
 
@@ -150,11 +154,11 @@ apiMethods
         v-model="rawSpecialityLevelValues"
         firstSelectTitle="Select specialities"
         secondSelectTitle="Level"
-        :fisrtSelectChoices="specialityList.map((item) => ({ value: item.id, title: item.label }))"
+        :firstSelectChoices="firstChoiceSpecialityList"
         :secondSelectChoices="[
           { value: 'Beginner', title: 'Beginner' },
           { value: 'Intermediate', title: 'Intermediate' },
-          { value: 'Advenced', title: 'Advenced' }
+          { value: 'Advanced', title: 'Advanced' }
         ]"
         :errorDisplay="isSpecialitiesValid"
         errorMessage="select at least one specialty and select a level for each"

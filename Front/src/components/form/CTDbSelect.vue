@@ -8,7 +8,7 @@ export interface DbSelectValues {
   secondValue: Choice
 }
 
-interface Choice {
+export interface Choice {
   value: any
   title: string
 }
@@ -17,7 +17,7 @@ interface DbSelectProps {
   modelValue: Array<DbSelectValues> | undefined
   firstSelectTitle: string
   secondSelectTitle: string
-  fisrtSelectChoices: Array<Choice>
+  firstSelectChoices: Array<Choice>
   secondSelectChoices: Array<Choice>
   errorDisplay: boolean
   errorMessage?: string
@@ -27,7 +27,7 @@ interface DbSelectProps {
 /***** Variables ******/
 const props = defineProps<DbSelectProps>()
 const selectedValues = ref<Array<DbSelectValues>>([])
-const filteredFisrtSelectChoices = ref<Array<Choice>>([])
+const filteredFirstSelectChoices = ref<Array<Choice>>([])
 
 const emit = defineEmits<{
   'update:modelValue': [value: Array<DbSelectValues>]
@@ -36,28 +36,21 @@ const emit = defineEmits<{
 /***** Functions ******/
 function addFirstSelectedValue(event: Event) {
   const target = event.target as HTMLSelectElement
-  const selectedOption = props.fisrtSelectChoices[target.selectedIndex - 1]
-  if (selectedOption) {
-    selectedValues.value.push({
-      firstValue: selectedOption,
-      secondValue: { value: '', title: '' }
-    })
-    const index = filteredFisrtSelectChoices.value.findIndex(
-      (choice) => choice.value === selectedOption.value
-    )
-    if (index !== -1) {
-      filteredFisrtSelectChoices.value.splice(index, 1)
-    }
-    target.selectedIndex = 0
-  }
+  const selectedOption = filteredFirstSelectChoices.value[target.selectedIndex - 1]
+  selectedValues.value.push({
+    firstValue: selectedOption,
+    secondValue: { value: '', title: '' }
+  })
   emit('update:modelValue', selectedValues.value)
+  filteredFirstSelectChoices.value.splice(target.selectedIndex - 1, 1)
+  target.selectedIndex = 0
 }
 
 function removeFirstSelectedValue(value: Choice) {
   const index = selectedValues.value.findIndex((val) => val.firstValue.value === value.value)
   if (index !== -1) {
     selectedValues.value.splice(index, 1)
-    filteredFisrtSelectChoices.value.push(value)
+    filteredFirstSelectChoices.value.push(value)
   }
   emit('update:modelValue', selectedValues.value)
 }
@@ -73,9 +66,9 @@ function addSecondSelectedValue(event: Event, value: DbSelectValues) {
 
 /***** Executed Code ******/
 watch(
-  () => props.fisrtSelectChoices,
+  () => props.firstSelectChoices,
   (newValue) => {
-    filteredFisrtSelectChoices.value = newValue
+    filteredFirstSelectChoices.value = [...newValue]
   },
   { immediate: true, deep: true }
 )
@@ -83,7 +76,7 @@ watch(
   () => props.modelValue,
   (newValue) => {
     if (newValue) {
-      selectedValues.value = newValue
+      selectedValues.value = [...newValue]
     }
   },
   { immediate: true, deep: true }
@@ -95,7 +88,7 @@ watch(
     <select class="mb-8" @change="addFirstSelectedValue" data-cy="ct-db-select">
       <option disabled selected>{{ firstSelectTitle }}</option>
       <option
-        v-for="choice in filteredFisrtSelectChoices"
+        v-for="choice in filteredFirstSelectChoices"
         :key="choice.title"
         :value="choice.value"
       >
