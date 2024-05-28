@@ -25,7 +25,7 @@ const apiMethods = new ApiMethods()
 
 const user = ref<Partial<User>>({})
 const profile = ref<Partial<Profile>>({})
-const specialityList = ref<Array<Choice>>([])
+const firstChoiceSpecialityList = ref<Array<Choice>>([])
 const specialityLevelList = ref<Array<Partial<SpecialityLevel>>>([])
 
 const rawSpecialityLevelValues = ref<Array<DbSelectValues>>()
@@ -43,20 +43,20 @@ const isFormLoading = ref(true)
 function checkIfFormValid() {
   isSpecialitiesValid.value = checkAndMakeSpecialityLevel()
   isRequiredFieldCompleted.value =
-    validationMethods.validateRequiredFields(user.value, ['email', 'password']) &&
-    validationMethods.validateRequiredFields(profile.value, ['pseudo']) &&
-    specialityLevelList.value.length > 0
+      validationMethods.validateRequiredFields(user.value, ['email', 'password']) &&
+      validationMethods.validateRequiredFields(profile.value, ['pseudo']) &&
+      specialityLevelList.value.length > 0
   isMailValid.value = validationMethods.validateFieldsWithRegex(user.value.email, MAIL_REGEX)
   isPasswordValid.value = validationMethods.validateFieldsWithRegex(
-    user.value.password,
-    PASSWORD_REGEX
+      user.value.password,
+      PASSWORD_REGEX
   )
 
   isFormValid.value =
-    isRequiredFieldCompleted.value &&
-    isMailValid.value &&
-    isPasswordValid.value &&
-    isSpecialitiesValid.value
+      isRequiredFieldCompleted.value &&
+      isMailValid.value &&
+      isPasswordValid.value &&
+      isSpecialitiesValid.value
 }
 
 function checkAndMakeSpecialityLevel(): boolean {
@@ -96,7 +96,7 @@ async function registerRequest() {
       await router.push({ name: 'home' })
     } else {
       errorMessage.value =
-        'An error occurred while creating the token please log in to the login page'
+          'An error occurred while creating the token please log in to the login page'
     }
   } else {
     errorMessage.value = registerResponse.detail
@@ -107,14 +107,11 @@ async function registerRequest() {
 
 /***** Executed Code ******/
 apiMethods
-  .getData('specialities')
-  .then((returnedValue: Speciality[]) => {
-    for (let item of returnedValue) {
-      const choice: Choice = { value: item.id, title: item.label }
-      specialityList.value.push(choice)
-    }
-  })
-  .finally(() => (isFormLoading.value = false))
+    .getData('specialities')
+    .then((specialityList: Speciality[]) => {
+      firstChoiceSpecialityList.value = specialityList.map((item) => ({ value: item.id, title: item.label }) )
+    })
+    .finally(() => (isFormLoading.value = false))
 </script>
 
 <template>
@@ -126,52 +123,52 @@ apiMethods
       </router-link>
     </section>
     <c-t-form
-      :onSubmit="registerRequest"
-      classValue="bg-light-shadow-large br-50 p-32-64 ml-128"
-      :isFormValid="isFormValid"
-      :isRequiredFieldCompleted="isRequiredFieldCompleted"
-      :errorMessage="errorMessage"
+        :onSubmit="registerRequest"
+        classValue="bg-light-shadow-large br-50 p-32-64 ml-128"
+        :isFormValid="isFormValid"
+        :isRequiredFieldCompleted="isRequiredFieldCompleted"
+        :errorMessage="errorMessage"
     >
       <h1 class="txt-dark mb-32">Register</h1>
       <c-t-input
-        v-model="profile.pseudo"
-        type="text"
-        placeholder="Pseudo"
-        :errorDisplay="false"
-        marginBottom="mb-16"
-        dataCy="register-user-pseudo"
+          v-model="profile.pseudo"
+          type="text"
+          placeholder="Pseudo"
+          :errorDisplay="false"
+          marginBottom="mb-16"
+          dataCy="register-user-pseudo"
       />
       <c-t-input
-        v-model="user.email"
-        type="text"
-        placeholder="Mail"
-        :errorDisplay="isMailValid"
-        :errorMessage="MAIL_ERROR_MESSAGE"
-        marginBottom="mb-16"
-        dataCy="register-user-email"
+          v-model="user.email"
+          type="text"
+          placeholder="Mail"
+          :errorDisplay="isMailValid"
+          :errorMessage="MAIL_ERROR_MESSAGE"
+          marginBottom="mb-16"
+          dataCy="register-user-email"
       />
       <c-t-db-select
-        v-model="rawSpecialityLevelValues"
-        firstSelectTitle="Select specialities"
-        secondSelectTitle="Level"
-        :firstSelectChoices="specialityList"
-        :secondSelectChoices="[
+          v-model="rawSpecialityLevelValues"
+          firstSelectTitle="Select specialities"
+          secondSelectTitle="Level"
+          :firstSelectChoices="firstChoiceSpecialityList"
+          :secondSelectChoices="[
           { value: 'Beginner', title: 'Beginner' },
           { value: 'Intermediate', title: 'Intermediate' },
           { value: 'Advanced', title: 'Advanced' }
         ]"
-        :errorDisplay="isSpecialitiesValid"
-        errorMessage="select at least one specialty and select a level for each"
-        marginBottom="mb-16"
+          :errorDisplay="isSpecialitiesValid"
+          errorMessage="select at least one specialty and select a level for each"
+          marginBottom="mb-16"
       />
       <c-t-input
-        v-model="user.password"
-        type="password"
-        placeholder="Password"
-        :errorDisplay="isPasswordValid"
-        :errorMessage="PASSWORD_ERROR_MESSAGE"
-        marginBottom="mb-32"
-        dataCy="register-user-password"
+          v-model="user.password"
+          type="password"
+          placeholder="Password"
+          :errorDisplay="isPasswordValid"
+          :errorMessage="PASSWORD_ERROR_MESSAGE"
+          marginBottom="mb-32"
+          dataCy="register-user-password"
       />
       <button v-if="!isFormLoading" @click="checkIfFormValid()" data-cy="register-form-button">
         Sign in
