@@ -19,7 +19,14 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => [self::DISPLAY_OWN_USER]]
 )]
 #[Get(
+    name: 'get_own_user',
+    uriTemplate: 'profile/{id}',
+    requirements: ['id' => '\d+'],
+    normalizationContext: ['groups' => [self::DISPLAY_OWN_USER]]
+)]
+#[Get(
     name: 'get_another_user',
+    uriTemplate: 'user/{id}',
     requirements: ['id' => '\d+'],
     normalizationContext: ['groups' => [self::DISPLAY_ANOTHER_USER]]
 )]
@@ -30,8 +37,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    public const DISPLAY_OWN_USER = 'displaying the personal information of the logged-in user';
-    public const DISPLAY_ANOTHER_USER = 'displaying public information of another user';
+    public const DISPLAY_OWN_USER = 'displaying the personal information on the logged-in user';
+    public const DISPLAY_ANOTHER_USER = 'displaying public information on another user';
     public const CREATE_USER = 'create user and profile entity';
 
     #[Groups([self::DISPLAY_OWN_USER, self::DISPLAY_ANOTHER_USER])]
