@@ -15,12 +15,12 @@ class TechnologyLevel
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups([User::CREATE_USER])]
+    #[Groups([User::CREATE_USER, USER::DISPLAY_ANOTHER_USER])]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Technology $technology = null;
 
-    #[Groups([User::CREATE_USER])]
+    #[Groups([User::CREATE_USER, USER::DISPLAY_ANOTHER_USER])]
     #[ORM\Column(length: 255)]
     #[Assert\Choice(
         choices: ['Beginner', 'Intermediate', 'Advanced'],
