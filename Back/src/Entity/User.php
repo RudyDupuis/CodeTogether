@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
@@ -15,7 +16,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[Post(
     uriTemplate: 'register',
     denormalizationContext: ['groups' => [self::CREATE_USER]],
-    normalizationContext: ['groups' => [self::DISPLAY_USER]]
+    normalizationContext: ['groups' => [self::DISPLAY_OWN_USER]]
+)]
+#[Get(
+    name: 'get_own_user',
+    uriTemplate: 'profile/{id}',
+    requirements: ['id' => '\d+'],
+    normalizationContext: ['groups' => [self::DISPLAY_OWN_USER]]
+)]
+#[Get(
+    name: 'get_another_user',
+    uriTemplate: 'user/{id}',
+    requirements: ['id' => '\d+'],
+    normalizationContext: ['groups' => [self::DISPLAY_ANOTHER_USER]]
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -24,16 +37,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    public const DISPLAY_USER = 'display user information';
+    public const DISPLAY_OWN_USER = 'displaying the personal information on the logged-in user';
+    public const DISPLAY_ANOTHER_USER = 'displaying public information on another user';
     public const CREATE_USER = 'create user and profile entity';
 
-    #[Groups([self::DISPLAY_USER])]
+    #[Groups([self::DISPLAY_OWN_USER, self::DISPLAY_ANOTHER_USER])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups([self::DISPLAY_USER, self::CREATE_USER])]
+    #[Groups([self::DISPLAY_OWN_USER, self::CREATE_USER])]
     #[ORM\Column(length: 180)]
     #[Assert\Email]
     private ?string $email = null;
@@ -41,7 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var list<string> The user roles
      */
-    #[Groups([self::DISPLAY_USER, self::CREATE_USER])]
+    #[Groups([self::DISPLAY_OWN_USER, self::CREATE_USER])]
     #[ORM\Column]
     private array $roles = [];
 
@@ -55,7 +69,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $creationAt = null;
 
-    #[Groups([self::CREATE_USER, self::DISPLAY_USER])]
+    #[Groups([self::CREATE_USER, self::DISPLAY_OWN_USER, self::DISPLAY_ANOTHER_USER])]
     #[ORM\OneToOne(mappedBy: 'userRelation', cascade: ['persist', 'remove'])]
     #[Assert\Valid]
     private ?Profile $profile = null;

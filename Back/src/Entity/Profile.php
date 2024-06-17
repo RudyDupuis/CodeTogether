@@ -15,26 +15,29 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['pseudo'], message: 'This pseudo has already been taken')]
 class Profile
 {
-    #[Groups([User::DISPLAY_USER])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups([User::CREATE_USER, User::DISPLAY_USER])]
+    #[Groups([User::CREATE_USER, User::DISPLAY_OWN_USER, User::DISPLAY_ANOTHER_USER])]
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'You must choose a pseudo')]
     private ?string $pseudo = null;
 
+    #[Groups([User::CREATE_USER, User::DISPLAY_ANOTHER_USER])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $linkedinLink = null;
 
+    #[Groups([User::CREATE_USER, User::DISPLAY_ANOTHER_USER])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $portfolioLink = null;
 
+    #[Groups([User::CREATE_USER, User::DISPLAY_ANOTHER_USER])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $repositoryLink = null;
 
+    #[Groups([User::CREATE_USER, User::DISPLAY_ANOTHER_USER])]
     #[ORM\Column(length: 1000, nullable: true)]
     #[Assert\Length(
         max: 1000,
@@ -45,6 +48,7 @@ class Profile
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profilePicture = null;
 
+    #[Groups([User::DISPLAY_ANOTHER_USER])]
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Choice(choices: ['Open to work', 'Not available'])]
     private ?string $availability = null;
@@ -56,7 +60,7 @@ class Profile
     /**
      * @var Collection<int, SpecialityLevel>
      */
-    #[Groups([User::CREATE_USER])]
+    #[Groups([User::CREATE_USER, User::DISPLAY_ANOTHER_USER])]
     #[ORM\OneToMany(targetEntity: SpecialityLevel::class, mappedBy: 'profile', orphanRemoval: true, cascade: ['persist', 'remove'])]
     #[Assert\Valid]
     private Collection $specialityList;
@@ -64,7 +68,7 @@ class Profile
     /**
      * @var Collection<int, TechnologyLevel>
      */
-    #[Groups([User::CREATE_USER])]
+    #[Groups([User::CREATE_USER, User::DISPLAY_ANOTHER_USER])]
     #[ORM\OneToMany(targetEntity: TechnologyLevel::class, mappedBy: 'profile', orphanRemoval: true, cascade: ['persist', 'remove'])]
     #[Assert\Valid]
     private Collection $technologyList;
