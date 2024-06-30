@@ -35,3 +35,5 @@ export class TechnologyLevel {
     public profile: Profile
   ) {}
 }
+
+export const REGISTER_REQUIRED_FIELDS = ['pseudo']

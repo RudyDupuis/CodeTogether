@@ -7,7 +7,7 @@ import CTDotLoader from '@/components/loader/CTDotLoader.vue'
 import LogoTitle from '@/components/svg/LogoTitle.vue'
 import { ApiMethods } from '@/helpers/entities/ApiMethods'
 import { useRouter } from 'vue-router'
-import { User } from '@/entities/User'
+import { LOGIN_REQUIRED_FIELDS, User } from '@/entities/User'
 
 /***** Variables ******/
 const router = useRouter()
@@ -22,10 +22,7 @@ const isFormLoading = ref(false)
 
 /***** Functions ******/
 function checkIfFormValid() {
-  isRequiredFieldCompleted.value = validationMethods.validateRequiredFields(user.value, [
-    'email',
-    'password'
-  ])
+  isRequiredFieldCompleted.value = validationMethods.validateRequiredFields(user.value, LOGIN_REQUIRED_FIELDS)
   isFormValid.value = isRequiredFieldCompleted.value
 }
 

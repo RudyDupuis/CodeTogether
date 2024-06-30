@@ -9,3 +9,6 @@ export class User {
     public password?: string
   ) {}
 }
+
+export const LOGIN_REQUIRED_FIELDS = ['email', 'password']
+export const REGISTER_REQUIRED_FIELDS = ['email', 'password']
