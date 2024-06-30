@@ -6,8 +6,15 @@ import type { DbSelectValues, Choice } from '@/components/form/CTDbSelect.vue'
 import CTDbSelect from '@/components/form/CTDbSelect.vue'
 import CTDotLoader from '@/components/loader/CTDotLoader.vue'
 import { useRouter } from 'vue-router'
-import type { User } from '@/entities/User'
-import type { Profile, SpecialityLevel } from '@/entities/Profile'
+import {
+  REGISTER_REQUIRED_FIELDS as USER_REGISTER_REQUIRED_FIELDS,
+  type User
+} from '@/entities/User'
+import {
+  REGISTER_REQUIRED_FIELDS as PROFILE_REGISTER_REQUIRED_FIELDS,
+  type Profile,
+  type SpecialityLevel
+} from '@/entities/Profile'
 import { ref } from 'vue'
 import {
   MAIL_ERROR_MESSAGE,
@@ -43,8 +50,8 @@ const isFormLoading = ref(true)
 function checkIfFormValid() {
   isSpecialitiesValid.value = checkAndMakeSpecialityLevel()
   isRequiredFieldCompleted.value =
-    validationMethods.validateRequiredFields(user.value, ['email', 'password']) &&
-    validationMethods.validateRequiredFields(profile.value, ['pseudo']) &&
+    validationMethods.validateRequiredFields(user.value, USER_REGISTER_REQUIRED_FIELDS) &&
+    validationMethods.validateRequiredFields(profile.value, PROFILE_REGISTER_REQUIRED_FIELDS) &&
     specialityLevelList.value.length > 0
   isMailValid.value = validationMethods.validateFieldsWithRegex(user.value.email, MAIL_REGEX)
   isPasswordValid.value = validationMethods.validateFieldsWithRegex(
