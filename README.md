@@ -36,25 +36,11 @@ CodeTogether est un projet de groupe sur la création d'un site ayant pour but d
 
 ## Charte graphique
 
-### Le logo
-
-![En couleur](https://prod-files-secure.s3.us-west-2.amazonaws.com/7dad97a8-35de-4262-a9cd-6415be1af634/0598119f-cd0b-403b-a673-75dbd8ed083b/Logo.png)
-
-En couleur
-
-![En noir et blanc](https://prod-files-secure.s3.us-west-2.amazonaws.com/7dad97a8-35de-4262-a9cd-6415be1af634/99d53cc1-3281-4e9a-9531-c30e573e851b/Logo_(1).png)
-
-En noir et blanc
-
 ### La police
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/7dad97a8-35de-4262-a9cd-6415be1af634/29174c04-6e65-4028-9313-6dcc6c160162/Untitled.png)
 
 https://fonts.google.com/specimen/Kanit
 
 ### Les couleurs
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/7dad97a8-35de-4262-a9cd-6415be1af634/a22bc70c-4943-45fc-a4f2-a376ef05e1aa/Untitled.png)
 
 Primaire
 
@@ -62,21 +48,15 @@ Primaire
 
 Eléments importants  
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/7dad97a8-35de-4262-a9cd-6415be1af634/0784ed07-71d7-4ad9-a650-940c27920f6b/Untitled.png)
-
 Secondaire
 
 #FFBF1D
 
 Eléments cliquables / Eléments  très importants
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/7dad97a8-35de-4262-a9cd-6415be1af634/da0974a0-46c5-42d1-be4f-971ff027d93a/Untitled.png)
-
 Couleur clair
 
 #FEFEFE
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/7dad97a8-35de-4262-a9cd-6415be1af634/57e3186b-c3ef-4da2-b8db-5466e58277d5/Untitled.png)
 
 Couleur foncé
 
