@@ -1,4 +1,4 @@
-#CodeTogether
+# CodeTogether
 
 CodeTogether est un projet de groupe sur la création d'un site ayant pour but d'aider les dévellopeurs à trouver et gérer des projets de groupe.
 
